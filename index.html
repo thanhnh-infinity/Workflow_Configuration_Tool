@@ -1,0 +1,703 @@
+<html>
+	<head>
+		<title>
+		    Web Service Composition - Workflow Description Language
+		</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="shortcut icon" href="./images/favicon.ico">
+		<script src="./libs/jquery/jquery-2.0.3.min.js"></script>
+		<script src="./libs/jquery/jquery-ui.js"></script>
+		<script src="./libs/jquery/jquery.msgBox.js"></script>
+		<!-- <script src="./libs/jquery/jquery.mobile-1.4.5.min.js"></script> -->
+		<script src="./libs/cytospace/cytoscape.min.js"></script>
+		<script src="./libs/cytospace/dagre.min.js"></script>
+		<script src="./libs/cytospace/cytoscape-dagre.js"></script>
+		<script src="./libs/cytospace/cytoscape-context-menus.js"></script>
+		<script src="./libs/jquery/bootstrap-treeview.js"></script>
+		<script type="text/javascript" src="./libs/jquery/menu.js"></script>
+		<script src="./libs/toast/toastr.js" type="text/javascript"></script>
+		<!-- Demo -->
+		<script src="./sources/workflow_plan.js"></script>
+		<script src="./sources/workflow_plan_abstract_concrete.js"></script>
+		
+		<!-- End Demo -->
+		<script src="./scripts/configuration.js"></script>
+
+
+		<script src="./scripts/node.js"></script>
+		<script src="./scripts/edge.js"></script>
+		<script src="./scripts/planning.js"></script>
+
+    <script src="./scripts/workflow_plan_des_lang.js"></script>
+    <script src="./sources/ontology.js"></script>
+    <script src="./scripts/treeview.js"></script>
+		<script src="./scripts/connect_api_planning_ontology_engine.js"></script>
+
+		<script src="./scripts/utility.js"></script>
+
+
+		<link rel="stylesheet" type="text/css" href="./css/workflow.css">
+		<link rel="stylesheet" type="text/css" href="./css/loading.css">
+		<link href="./css/bootstrap.css" rel="stylesheet" type="text/css" />
+		<!-- <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css" /> -->
+		<link href="./css/cytoscape-context-menus.css" rel="stylesheet" type="text/css" />
+		<link href="./css/jquery.mobile-1.4.5.min.css" rel="stylesheet" type="text/css" />
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link href="./css/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+		<link href="./css/modal.css" rel="stylesheet" type="text/css" />
+		<link href="./css/msgBoxLight.css" rel="stylesheet" type="text/css" />
+		<link href="./css/bootstrap-treeview.css" rel="stylesheet" type="text/css" />
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="./css/bootstrap-select.min.css">
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="./libs/bootstrap/bootstrap-select.min.js"></script>
+		<script src="./libs/bootstrap/bootstrap.js" defer></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<!-- <link rel="stylesheet" href="./css/font-awesome.min.css"> -->
+	  <link rel="stylesheet" type="text/css" href="css/menu.css">
+	  <link rel="stylesheet" type="text/css" href="./css/toastr.css">
+	  <!--
+		<script type="text/javascript">
+	        $(window).scroll(function () {
+	            if ($(window).scrollTop() > 226) {
+	                $(".header").addClass("fixed");
+	            } else {
+	                $(".header").removeClass("fixed");
+	            }
+	        });
+	    </script>
+	    <style type="text/css">
+	        .fixed {
+			        position:fixed;
+			        width:100%;
+			        top:0;
+			        left:0;
+	    		}
+	    </style>
+	-->    
+	</head>
+
+	<body>
+
+		<!-- <div style="background:#0099cc; font-size:22px; text-align:center; color:#FFF; font-weight:bold; height:100px; padding-top:50px;">Workflow Configuration Tool</div> -->
+	 
+	  <div id="wrap">
+			<header>
+				<div class="inner relative">
+					<a class="logo" href="#"> <img src="images/phylotastic_logo.png" alt="fresh design web"></a>
+					<a id="menu-toggle" class="button dark" href="#"><i class="icon-reorder"></i></a>
+					<nav id="navigation">
+						<ul id="main-menu">
+							<li class="current-menu-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+							<li class="parent">
+								<a href="#"><i class="fa fa-wrench"></i> Configuration</a>
+								<ul class="sub-menu">
+									<li><a href="#" onclick="openAddInitialState_FromOntology_Modal_TreeView();"><i class="fa fa-sign-in"></i> Initial State</a></li>
+									<li><a href="#" onclick="openAddGoalState_FromOntology_Modal_TreeView();"><i class="fa fa-sign-out"></i>  Goal State</a></li>
+									<li>
+									   <a class="parent" href="#"><i class="fa fa-edit"></i>  Refine current Workflow</a>
+									   <ul class="sub-menu">
+											 <li><a href="#" onclick="openAvoidanceService_Modal_List();"><i class="fa fa-user-times"></i> Avoidance services</a></li>
+											 <li><a href="#" onclick="openAddOperationNodeData_Modal();"><i class="fa fa-user-plus"></i> Inclusion services</a></li>
+											 <li><a href="#"><i class="fa fa-users"></i> Insertion services</a></li>
+											 <li>
+											    <a class="parent" href="#"><i class="fa fa-steam"></i> Manually Configurations</a>
+											    <ul class="sub-menu">
+											       <li><a href="#"><i class="material-icons" style="font-size:15px">call_split</i> Set Up Condition Block</a></li>
+											    </ul>
+											 </li>
+										</ul>
+									</li>
+									<li>
+									   <a href="#" onclick="openAddEdgeData_Modal();"><i class="fa fa-sitemap"></i>  Set up Connections (Edges)</a>
+									</li>
+									<li>
+									   <a href="#" onclick="openChangeEngine_Modal();"><i class="fa fa-gear"></i>  Configurate Engines</a>
+									</li>
+								</ul>
+							</li>
+							<li class="parent">
+								<a href="#"><i class="fa fa-gears"></i> Services Engines</a>
+								<ul class="sub-menu">
+									<li><a href="#" onclick="executePlanner_toGet_WorkFlow();"><i class="fa fa-rocket"></i> Generate Workflow  <i class="fa fa-play-circle"></i></a></li>
+									<li><a href="#" onclick="recomposite_get_simWorkflow();"><i class="fa fa-retweet"></i> Re-Compostion Workflow  <i class="fa fa-play-circle-o"></i></a></li>
+								</ul>		
+							</li>
+							<li class="parent">
+								<a href="#"><i class="fa fa-legal"></i> Tools</a>
+								<ul class="sub-menu">
+								  <li><a href="#" onclick="infoWFChangesData();"><i class="fa fa-dashboard"></i>  Dashboard</a></li>
+								  <li><a href="#" onclick="reload();"><i class="glyphicon glyphicon-screenshot"></i>  Focus view</a></li>
+									<li><a href="#" onclick="clearData();"><i class="fa fa-trash"></i> Clear Workstation Data</a></li>		
+								</ul>
+							</li>
+							<li class="parent">
+							  <a href="#"><i class="fa fa-institution"></i> More</a>
+							  <ul class="sub-menu">
+									<li><a href="#"><i class="fa fa-info-circle"></i> About Us</a></li>
+									<li><a href="#"><i class="fa fa-question-circle-o"></i> Help</a></li>
+									<li><a href="https://github.com/phylotastic" target="_blank"><i class="fa fa-github-alt"></i> Phylotastic on Github</a></li>
+									<li><a href="#"><i class="fa fa-files-o"></i> Publifications</a></li>
+									<li class="parent">
+									   <a href="#"><i class="fa fa-files-o"></i> Related Web-Sites</a>
+									   <ul class="sub-menu">
+									      <li><a href="#"><i class="fa fa-info-circle" target="_blank"></i> Main Site</a></li>
+									      <li><a href="#"><i class="fa fa-info-circle" target="_blank"></i> Data Portal</a></li>
+									   </ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</nav>
+					<div class="clear"></div>
+				</div>
+			</header>	
+		</div> 
+	 
+		<div class="header">
+			<!-- Modal for Edge Adding tool -->
+			<div id="addEdgeDataModal" class="modal">
+			  <div class="modal-content">
+			  		<span class="close" onclick="closeAddEdgeData_Modal();">&times;</span>	
+			  		<div class="msgBoxTitle">Define Connections (Edges) between Services (Nodes)</div>
+			   		<br/>
+
+			     
+					  <h4><span class="label label-primary">Source Service Node</span></h4>
+						  <select id="sourceOperationNode" style="-webkit-appearance: button;-webkit-border-radius: 2px;-webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);-webkit-padding-end: 5px;-webkit-padding-start: 2px;-webkit-user-select: none;background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);background-position: 97% center;background-repeat: no-repeat;border: 1px solid #AAA;color: #555;font-size: 13px;margin: 5px;overflow: hidden;padding: 5px 15px;text-overflow: ellipsis;white-space: nowrap;width: 400px;">
+						  	 <option value=""></option>
+					    </select>
+				    <br/>
+				    <br/>
+				    <h4><span class="label label-primary">Target Service Node</span></h4>
+				    <select id="targetOperationNode" style="-webkit-appearance: button;-webkit-border-radius: 2px;-webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);-webkit-padding-end: 5px;-webkit-padding-start: 2px;-webkit-user-select: none;background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);background-position: 97% center;background-repeat: no-repeat;border: 1px solid #AAA;color: #555;font-size: 13px;margin: 5px;overflow: hidden;padding: 5px 15px;text-overflow: ellipsis;white-space: nowrap;width: 400px;">
+						    <option value=""></option>
+				    </select>
+				    <br/>
+				    <br/>
+						
+						<div id="div_Save_Operations_TreeView" class="msgBoxButtons">
+					  	<input class="msgButton" type="button" name="Add" value="Add" onclick="saveAddNewEdgeData_Modal();" id="btn_Save_Edge_TreeView">
+					  	<input class="msgButton" type="button" name="Cancel" value="Cancel" onclick="closeAddEdgeData_Modal();" id="btn_Cancel_Edge_TreeView">
+					  </div>
+			  </div>
+			</div>
+
+			<div id="changeEngine_Modal" class="modal">
+			  <div class="modal-content">
+			  		<span class="close" onclick="closeChangeEngine_Modal();">&times;</span>	
+			  		<div class="msgBoxTitle"><i class="fa fa-gear"></i> Configurate Composite and Re-composite Engines</div>
+			   		<br/>   
+					  <h4><span class="label label-primary"><i class="fa fa-rocket"></i> Composition Engine</span></h4>
+					     
+			    	<select id="selectCompositionEngine" class="selectpicker" data-width="auto">
+				  	  <option value="1" title="1 - Clingo, Generate a random Workflow">1 - Clingo, Generate a random Workflow</option>
+				  	  <option value="2" title="2 - Clingo, Generate Highest QoS value Workflow by External Calculation">2 - Clingo, Generate Highest QoS value Workflow by External Calculation</option>
+				  	  <option value="3" title="3 - Clingcon, Generate Highest QoS value Workflow by Internal Calculation">3 - Clingcon, Generate Highest QoS value Workflow by Internal Calculation</option>
+			      </select> 
+							  
+				    <br/><br/>
+				    
+				    <h4><span class="label label-primary"><i class="fa fa-retweet"></i> Re-Composition Engine</span></h4>
+				    <select id="selectReCompositionEngine" class="selectpicker" data-width="auto">
+				  	  <option value="1" title="1 - Clingo, Approximate Sim Index, Sim Nodes Only">1 - Clingo, Approximate Sim Index, Sim Nodes Only</option>
+				  	  <option value="2" title="2 - Clingo, Exact Sim Index, (Nodes, Edges and Topology) Sim Index">2 - Clingo, Exact Sim Index, (Nodes, Edges and Topology) Sim Index</option>
+			      </select>
+				    <br/><br/>
+				    
+						<div id="div_Save_Operations_TreeView" class="msgBoxButtons">
+					  	<input class="msgButton" type="button" name="Save" value="Save" onclick="saveChangeEngine_Modal();" id="btn_Save_ChangeEngine">
+					  	<input class="msgButton" type="button" name="Cancel" value="Cancel" onclick="closeChangeEngine_Modal();" id="btn_Cancel_ChangeEngine">
+					  </div>
+			  </div>
+			</div>
+
+
+			<!-- Modal for Operation Node Adding tool -->
+			<div id="addOperationNodeDataModal" class="modal">
+			  <div class="modal-content">
+
+
+			      <span class="close" onclick="closeAddOperationNodeData_Modal();">&times;</span>
+			   		<div class="msgBoxTitle"><i class="fa fa-user-plus"></i> Select concrete service to be included in Workflow</div>
+			   	
+					  <h4><span class="label label-primary"><i class="fa fa-database"></i>  Services Class Tree - Click an item to select</span></h4>
+			    	<div id="service_hierarchy_tree"></div>
+			    	<br/>
+			    	<h4><span class="label label-primary">Select Concrete Service Operation</span></h4>
+					  
+					  <div id="div_concrete_operation_list">
+					  </div>
+
+					  <br/>
+					  <br/>
+
+					  <div id="div_Save_Operations_TreeView" class="msgBoxButtons">
+					  	<input class="msgButton" type="button" name="Add" value="Add" onclick="saveAddOperationNodeData_Modal();" id="btn_Save_Operations_TreeView">
+					  	<input class="msgButton" type="button" name="Cancel" value="Cancel" onclick="closeAddOperationNodeData_Modal();" id="btn_Cancel_Operations_TreeView">
+					  </div>
+			  </div>
+			</div>
+
+
+			<!-- Modal for Operation Class Hierarchy Adding tool -->
+			<div id="addOperationClassModal" class="modal">
+				<!-- Modal content -->
+			  	<div class="modal-content">
+			  		<span class="close" onclick="closeAddOperationClass_Modal();">&times;</span>
+			  		<p>Operation Class - Root</p>
+
+			  		<div id="divDisplayOperationClassHierarchy">
+			  		    
+					</div>	
+					<br/>
+					<br/>
+					<button id="save" onclick="saveAddOperationClass_Modal();">Add</button>
+			  	</div>
+			</div>
+
+
+			<!-- Modal for Operation Class Hierarchy Adding tool -->
+			<div id="addInitialStateModal_Hierarchy" class="modal">
+				<!-- Modal content -->
+			  	<div class="modal-content">
+			  		<span class="close" onclick="closeAddInitialState_Modal_Hierarchy();">&times;</span>
+			  		<p>Provide components in Initial State</p>
+			  		<p>Resources root class</p>
+			  		<div id="divDisplayInitialState_ResourcesClassHierarchy">  
+					  </div>	
+					<br/>
+					<br/>
+					<p>Data format of selected resource</p>
+					<div id="divDisplayInitialState_DataFormatClasses">
+					   <select id="selectInitialState_DataFormatClasses">
+					      <option value=""></option>
+					      <option value="list_of_things">list_of_things</option>
+					      <option value="list_of_strings">list_of_strings</option>
+					      <option value="number">number</option>
+					      <option value="double">double</option>
+					      <option value="integer">integer</option>
+					      <option value="http_url">http_url</option>
+					      <option value="uri">uri</option>
+					      <option value="string">string</option>
+					      <option value="data_format_A">data_format_A</option>
+					      <option value="data_format_B">data_format_B</option>
+					      <option value="data_format_C">data_format_C</option>
+					      <option value="data_format_D">data_format_D</option>
+					      <option value="data_format_E">data_format_E</option>
+					      <option value="data_format_F">data_format_F</option>
+					      <option value="plain_text">plain_text</option>
+					      <option value="data_format_A_1">data_format_A_1</option>
+					      <option value="data_format_A_2">data_format_A_2</option>
+					      <option value="data_format_A_3">data_format_A_3</option>
+					      <option value="names_format_1">names_format_1</option>
+					      <option value="names_format_2">names_format_2</option>
+					      <option value="names_format_3">names_format_3</option>
+					      <option value="names_format_4">names_format_4</option>
+					      <option value="names_format_5">names_format_5</option>
+					      <option value="names_format_6">names_format_6</option>
+					      <option value="names_format_resolved_GNR">names_format_resolved_GNR</option>
+					      <option value="names_format_resolved_OT">names_format_resolved_OT</option>
+					      <option value="data_format_C_1">data_format_C_1</option>
+					      <option value="data_format_C_2">data_format_C_2</option>
+					      <option value="tree_format_1">tree_format_1</option>
+					      <option value="tree_format_2">tree_format_2</option>
+					      <option value="tree_format_3">tree_format_3</option>
+					      <option value="tree_format_4">tree_format_4</option>
+					      <option value="newickTree">newickTree</option>
+					      <option value="phyloXML">phyloXML</option>
+					      <option value="phylo4Tree">phylo4Tree</option>
+					      <option value="boolean">boolean</option>
+					       <option value="compare_tree_format">compare_tree_format</option>	
+					   </select>  
+					</div>
+					<br/>
+					<br/>
+					<button id="save" onclick="saveAddInitialState_Modal_Hierarchy();">Add</button>
+					<button id="save" type="button" class="btn btn-default navbar-btn"  onclick="saveAddInitialState_Modal_Hierarchy();">Add</button>
+			  	</div>
+			</div>
+
+			<!-- Modal for Operation Class Hierarchy Adding tool -->
+			<div id="addGoalStateModal_Hierarchy" class="modal">
+				<!-- Modal content -->
+			  	<div class="modal-content">
+			  		<span class="close" onclick="closeAddGoalState_Modal_Hierarchy();">&times;</span>
+			  		<p>Provide components in Goal State</p>
+			  		<p>Resources root class</p>
+
+			  		<div id="divDisplayGoalState_ResourcesClassHierarchy">
+			  		    
+					</div>
+					<br/>
+					<br/>	
+					<p>Data format of selected resource</p>
+					<div id="divDisplayGoalState_DataFormatClasses">
+					   <select id="selectGoalState_DataFormatClasses">
+					      <option value=""></option>
+					      <option value="list_of_things">list_of_things</option>
+					      <option value="list_of_strings">list_of_strings</option>
+					      <option value="number">number</option>
+					      <option value="double">double</option>
+					      <option value="integer">integer</option>
+					      <option value="http_url">http_url</option>
+					      <option value="uri">uri</option>
+					      <option value="string">string</option>
+					      <option value="data_format_A">data_format_A</option>
+					      <option value="data_format_B">data_format_B</option>
+					      <option value="data_format_C">data_format_C</option>
+					      <option value="data_format_D">data_format_D</option>
+					      <option value="data_format_E">data_format_E</option>
+					      <option value="data_format_F">data_format_F</option>
+					      <option value="plain_text">plain_text</option>
+					      <option value="data_format_A_1">data_format_A_1</option>
+					      <option value="data_format_A_2">data_format_A_2</option>
+					      <option value="data_format_A_3">data_format_A_3</option>
+					      <option value="names_format_1">names_format_1</option>
+					      <option value="names_format_2">names_format_2</option>
+					      <option value="names_format_3">names_format_3</option>
+					      <option value="names_format_4">names_format_4</option>
+					      <option value="names_format_5">names_format_5</option>
+					      <option value="names_format_6">names_format_6</option>
+					      <option value="names_format_resolved_GNR">names_format_resolved_GNR</option>
+					      <option value="names_format_resolved_OT">names_format_resolved_OT</option>
+					      <option value="data_format_C_1">data_format_C_1</option>
+					      <option value="data_format_C_2">data_format_C_2</option>
+					      <option value="tree_format_1">tree_format_1</option>
+					      <option value="tree_format_2">tree_format_2</option>
+					      <option value="tree_format_3">tree_format_3</option>
+					      <option value="tree_format_4">tree_format_4</option>
+					      <option value="newickTree">newickTree</option>
+					      <option value="phyloXML">phyloXML</option>
+					      <option value="phylo4Tree">phylo4Tree</option>	
+					      <option value="boolean">boolean</option>
+					       <option value="compare_tree_format">compare_tree_format</option>	
+					   </select>  
+					</div>
+					
+					<br/>
+					<br/>
+					<button id="save" onclick="saveAddGoalState_Modal_Hierarchy();">Add</button>
+			  	</div>
+			</div>
+
+		<div id="addInitialStateModal_TreeView" class="modal">
+			   <div class="modal-content">
+			      <span class="close" onclick="closeAddInitialState_Modal_TreeView();">&times;</span>
+			   		<div class="msgBoxTitle"><i class="fa fa-sign-in"></i> Initial State Definition : Resources and Data Formats</div>
+			   		<br/>
+			   		
+					  <h4><span class="label label-primary"><i class="fa fa-database"></i>  Resources Tree - Click an item to select</span></h4>
+						
+			    	<div id="resource_tree_init"></div>
+			    	
+			    	<h4><span class="label label-primary"><i class="fa fa-info-circle"></i>  Data format of selected resource</span></h4>
+						  
+				    <div id="divDisplayInitialState_DataFormatClasses_TreeView">
+						   <select id="selectInitialState_DataFormatClasses_TreeView" class="selectpicker show-tick" data-live-search="true">
+						      <optgroup label="Primitive">
+						        <option value=""></option>
+						        <option value="boolean">boolean</option>
+						      	<option value="number">number</option>
+						        <option value="double">double</option>
+						        <option value="integer">integer</option>
+						        <option value="string">string</option>	
+						      </optgroup>
+						      <optgroup label="Set">
+						      	<option value="list_of_things">list_of_things</option>
+						        <option value="list_of_strings">list_of_strings</option>	
+						      </optgroup>
+						      <optgroup label="Text format">
+						      	<option value="plain_text">plain_text</option>
+						      	<option value="raw_text">raw_text</option>
+						      	<option value="encoded_text">encoded_text</option>
+						      </optgroup>
+						     	<optgroup label="Phylogeny format">
+							      <option value="tree_format_1">tree_format_1</option>
+							      <option value="tree_format_2">tree_format_2</option>
+							      <option value="tree_format_3">tree_format_3</option>
+							      <option value="tree_format_4">tree_format_4</option>
+							      <option value="newickTree">newickTree</option>
+							      <option value="phyloXML">phyloXML</option>
+							      <option value="phylo4Tree">phylo4Tree</option>
+							       <option value="compare_tree_format">compare_tree_format</option>	
+							    </optgroup> 
+							    <optgroup label="URI format">
+						        <option value="http_url">http_url</option>
+						         <option value="uri">uri</option>
+						      </optgroup>
+						      <optgroup label="Test data format">
+						      	<option value="data_format_A">data_format_A</option>
+							      <option value="data_format_B">data_format_B</option>
+							      <option value="data_format_C">data_format_C</option>
+							      <option value="data_format_D">data_format_D</option>
+							      <option value="data_format_E">data_format_E</option>
+							      <option value="data_format_F">data_format_F</option>
+							      <option value="data_format_A_1">data_format_A_1</option>
+							      <option value="data_format_A_2">data_format_A_2</option>
+							      <option value="data_format_A_3">data_format_A_3</option>  
+							      <option value="data_format_C_1">data_format_C_1</option>
+						        <option value="data_format_C_2">data_format_C_2</option>
+						      </optgroup>
+						      <optgroup label="Names Format">
+						         <option value="names_format_1">names_format_1</option>
+						      	 <option value="names_format_2">names_format_2</option>
+						         <option value="names_format_3">names_format_3</option>
+						         <option value="names_format_4">names_format_4</option>
+						         <option value="names_format_5">names_format_5</option>
+						         <option value="names_format_6">names_format_6</option>
+						         <option value="names_format_resolved_GNR">names_format_resolved_GNR</option>
+						         <option value="names_format_resolved_OT">names_format_resolved_OT</option>
+						      </optgroup>
+						   </select>  
+						</div>
+						 
+			    	<br/>
+					  <br/>
+
+					  <div id="div_Save_InitialState_Comps_TreeView" class="msgBoxButtons">
+					  	<input class="msgButton" type="button" name="Add" value="Add" onclick="saveAddInitialState_Modal_TreeView();" id="btn_Save_InitialState_Comps_TreeView">
+					  	<input class="msgButton" type="button" name="Cancel" value="Cancel" onclick="closeAddInitialState_Modal_TreeView();" id="btn_Cancel_InitialState_Comps_TreeView">
+					  </div>
+					</div>
+	  </div>				
+
+		<div id="addGoalStateModal_TreeView" class="modal">
+			   <div class="modal-content">
+			      <span class="close" onclick="closeAddGoalState_Modal_TreeView();">&times;</span>
+			   		<div class="msgBoxTitle"><i class="fa fa-sign-out"></i> Goal State Definition : Resources and Data Formats</div>
+			   		<br/>
+			   		
+					  <h4><span class="label label-primary"><i class="fa fa-database"></i>  Resources Tree - Click an item to select</span></h4>
+				
+			    	<div id="resource_tree_goal"></div>
+			    
+					  <h4><span class="label label-primary"><i class="fa fa-info-circle"></i>  Data format of selected resource</span></h4>
+					  
+			    	<div id="divDisplayGoalState_DataFormatClasses_TreeView">
+					   <select id="selectGoalState_DataFormatClasses_TreeView" class="selectpicker show-tick" data-live-search="true">
+					      <optgroup label="Primitive">
+						        <option value=""></option>
+						        <option value="boolean">boolean</option>
+						      	<option value="number">number</option>
+						        <option value="double">double</option>
+						        <option value="integer">integer</option>
+						        <option value="string">string</option>	
+						      </optgroup>
+						      <optgroup label="Set">
+						      	<option value="list_of_things">list_of_things</option>
+						        <option value="list_of_strings">list_of_strings</option>	
+						      </optgroup>
+						      <optgroup label="Text format">
+						      	<option value="plain_text">plain_text</option>
+						      	<option value="raw_text">raw_text</option>
+						      	<option value="encoded_text">encoded_text</option>
+						      </optgroup>
+						     	<optgroup label="Phylogeny format">
+							      <option value="tree_format_1">tree_format_1</option>
+							      <option value="tree_format_2">tree_format_2</option>
+							      <option value="tree_format_3">tree_format_3</option>
+							      <option value="tree_format_4">tree_format_4</option>
+							      <option value="newickTree">newickTree</option>
+							      <option value="phyloXML">phyloXML</option>
+							      <option value="phylo4Tree">phylo4Tree</option>
+							       <option value="compare_tree_format">compare_tree_format</option>	
+							    </optgroup> 
+							    <optgroup label="URI format">
+						        <option value="http_url">http_url</option>
+						         <option value="uri">uri</option>
+						      </optgroup>
+						      <optgroup label="Test data format">
+						      	<option value="data_format_A">data_format_A</option>
+							      <option value="data_format_B">data_format_B</option>
+							      <option value="data_format_C">data_format_C</option>
+							      <option value="data_format_D">data_format_D</option>
+							      <option value="data_format_E">data_format_E</option>
+							      <option value="data_format_F">data_format_F</option>
+							      <option value="data_format_A_1">data_format_A_1</option>
+							      <option value="data_format_A_2">data_format_A_2</option>
+							      <option value="data_format_A_3">data_format_A_3</option>  
+							      <option value="data_format_C_1">data_format_C_1</option>
+						        <option value="data_format_C_2">data_format_C_2</option>
+						      </optgroup>
+
+						      <optgroup label="Names Format">
+						         <option value="names_format_1">names_format_1</option>
+						      	 <option value="names_format_2">names_format_2</option>
+						         <option value="names_format_3">names_format_3</option>
+						         <option value="names_format_4">names_format_4</option>
+						         <option value="names_format_5">names_format_5</option>
+						         <option value="names_format_6">names_format_6</option>
+						         <option value="names_format_resolved_GNR">names_format_resolved_GNR</option>
+						         <option value="names_format_resolved_OT">names_format_resolved_OT</option>
+						      </optgroup>	
+					   </select>  
+					</div>
+					 
+		    	<br/>
+				  <br/>
+
+				  <div id="div_Save_GoalState_Comps_TreeView" class="msgBoxButtons">
+				  	<input class="msgButton" type="button" name="Add" value="Add" onclick="saveAddGoalState_Modal_TreeView();" id="btn_Save_GoalState_Comps_TreeView">
+				  	<input class="msgButton" type="button" name="Cancel" value="Cancel" onclick="closeAddGoalState_Modal_TreeView();" id="btn_Cancel_GoalState_Comps_TreeView">
+				  </div>
+			   </div> 
+		
+		</div>
+
+		<div id="displayChangesInformation_Modal" class="modal">
+			   <div class="modal-content">
+			      <span class="close" onclick="closeDisplayChangesInformation_Modal();">&times;</span>
+			   		<div class="msgBoxTitle"><i class="fa fa-dashboard"></i> Workflow Configuration Dashboard</div>
+			   		<br/>
+			   		
+					  <h4><span class="label label-primary"><i class="fa fa-user-plus"></i>  Inclusion Services</span></h4>
+					  <hr/>
+			  		<div id = "inclusion_grid" class="container-fluid">
+			  		  <!--
+						  <div class="row">
+						    <div class="col-sm-4">.col-sm-4</div>
+						    <div class="col-sm-2">.col-sm-2</div>
+						  </div>
+						  -->
+						</div>
+				
+						<br/>
+					  <h4><span class="label label-danger"><i class="fa fa-user-times"></i> Avoidance Services</span></h4>
+					  <hr/>
+					  <div id = "avoidance_grid" class="container-fluid">
+			  		  <!--
+						  <div class="row">
+						    <div class="col-sm-4">.col-sm-4</div>
+						    <div class="col-sm-2">.col-sm-2</div>
+						  </div>
+						  -->
+						</div>
+					  
+					  <br/>
+			    	<h4><span class="label label-info"><i class="fa fa-users"></i> Insertion Services</span></h4>
+			    	<hr/>
+					 	
+					 	<br/>
+					 	<h4><span class="label label-success"><i class="fa fa-users"></i> Graph Connections</span></h4>
+					 	<hr/>
+
+					 	<h4><span class="label label-default"><i class="fa fa-sign-in"></i>  Initial State</span></h4>
+					  <hr/>
+			  		<div id = "initial_state_grid" class="container-fluid">
+			  		  <!--
+						  <div class="row">
+						    <div class="col-sm-4">.col-sm-4</div>
+						    <div class="col-sm-2">.col-sm-2</div>
+						  </div>
+						  -->
+						</div>
+
+						<h4><span class="label label-default"><i class="fa fa-sign-out"></i>  Goal State</span></h4>
+					  <hr/>
+			  		<div id = "goal_state_grid" class="container-fluid">
+			  		  <!--
+						  <div class="row">
+						    <div class="col-sm-4">.col-sm-4</div>
+						    <div class="col-sm-2">.col-sm-2</div>
+						  </div>
+						  -->
+						</div>
+						<h4><span class="label label-primary"><i class="fa fa-gear"></i>  Engine Configuration</span>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" onclick="updateEngine();">Change</button></h4>
+					  <hr/>
+			  		<div id = "engine_state_grid" class="container-fluid">
+			  		  <!--
+						  <div class="row">
+						    <div class="col-sm-4">.col-sm-4</div>
+						    <div class="col-sm-2">.col-sm-2</div>
+						  </div>
+						  -->
+						</div>
+		    	<br/>
+				  <br/>
+
+				  <div class="msgBoxButtons">
+				  	<input class="msgButton" type="button" name="OK" value="OK" onclick="closeDisplayChangesInformation_Modal();" id="btn_Cancel_DisplayChangesInformation">
+				  </div>
+			   </div> 
+		
+		</div>
+
+		<div id="avoidanceService_Modal_List" class="modal">
+			   <div class="modal-content">
+			      <span class="close" onclick="closeAvoidanceService_Modal_List();">&times;</span>
+			   		<div class="msgBoxTitle"><i class="fa fa-user-times"></i> Select concrete service to be avoided in Workflow</div>
+			   		<br/>
+			   		
+					  <h4><span class="label label-primary"><i class="fa fa-user-times"></i>  Avoidance Services</span></h4>
+					  <hr/>
+			  		<div id="divAvoidacneService_Modal_List">
+					   <select id="selectAvoidacneService_Modal_List" class="selectpicker show-tick" data-live-search="true" multiple>
+					       <optgroup label="Names Resolution">
+						      	<option value="phylotastic_ResolvedScientificNames_GNR_TNRS_GET">phylotastic_ResolvedScientificNames_GNR_TNRS_GET</option>
+							      <option value="phylotastic_ResolvedScientificNames_GNR_TNRS_POST">phylotastic_ResolvedScientificNames_GNR_TNRS_POST</option>
+							      <option value="phylotastic_ResolvedScientificNames_OT_TNRS_GET">phylotastic_ResolvedScientificNames_OT_TNRS_GET</option>
+							      <option value="phylotastic_ResolvedScientificNames_OT_TNRS_POST">phylotastic_ResolvedScientificNames_OT_TNRS_POST</option>
+							   </optgroup>   
+							   <optgroup label="Species Operations">
+							   		<option value="phylotastic_GetAllSpeciesFromTaxon_OT_GET">phylotastic_GetAllSpeciesFromTaxon_OT_GET</option>
+							   		<option value="phylotastic_GetInformationURLsOfSpecies_EOL_POST">phylotastic_GetInformationURLsOfSpecies_EOL_POST</option>
+						        <option value="phylotastic_GetInformationURLsOfSpecies_EOL_GET">phylotastic_GetInformationURLsOfSpecies_EOL_GET</option>
+						        <option value="phylotastic_GetImageURLsOfSpecies_EOL_GET">phylotastic_GetImageURLsOfSpecies_EOL_GET</option>
+						        <option value="phylotastic_GetImageURLsOfSpecies_EOL_POST">phylotastic_GetImageURLsOfSpecies_EOL_POST</option>
+						        <option value="phylotastic_GetSpeciesOfTaxon_Genome_NCBI_GET">phylotastic_GetSpeciesOfTaxon_Genome_NCBI_GET</option>
+						        <option value="phylotastic_GetAllSpeciesFromTaxon_Country_OT_GET">phylotastic_GetAllSpeciesFromTaxon_Country_OT_GET</option>
+							   </optgroup>
+							      
+							   <optgroup label="Tree Generation">   
+							      <option value="phylotastic_GetPhylogeneticTree_OT_GET">phylotastic_GetPhylogeneticTree_OT_GET</option>
+							      <option value="phylotastic_GetPhylogeneticTree_OT_POST">phylotastic_GetPhylogeneticTree_OT_POST</option>
+							      <option value="phylotastic_GetPhylogeneticTree_Phylomatic_GET">phylotastic_GetPhylogeneticTree_Phylomatic_GET</option>
+							      <option value="phylotastic_GetPhylogeneticTree_Phylomatic_POST">phylotastic_GetPhylogeneticTree_Phylomatic_POST</option>  
+							      <option value="phylotastic_GetPhylogeneticTree_PhyloT_GET">phylotastic_GetPhylogeneticTree_PhyloT_GET</option>
+						        <option value="phylotastic_GetPhylogeneticTree_PhyloT_POST">phylotastic_GetPhylogeneticTree_PhyloT_POST</option>
+						        <option value="phylotastic_GetReconciliationTree_GET">phylotastic_GetReconciliationTree_GET</option>
+						        <option value="phylotastic_GenerateGeneTree_From_Genes">phylotastic_GenerateGeneTree_From_Genes</option>
+                 </optgroup>
+                 <optgroup label="Names Extraction">
+                    <option value="phylotastic_FindScientificNamesFromWeb_GNRD_GET">phylotastic_FindScientificNamesFromWeb_GNRD_GET</option>
+						        <option value="phylotastic_FindScientificNamesFromFreeText_GNRD_GET">phylotastic_FindScientificNamesFromFreeText_GNRD_GET</option>
+						        <option value="phylotastic_FindScientificNamesFromWeb_CS_NMSU_GET">phylotastic_FindScientificNamesFromWeb_CS_NMSU_GET</option>
+						        <option value="phylotastic_ExtractSpeciesNames_From_Gene_Tree_GET">phylotastic_ExtractSpeciesNames_From_Gene_Tree_GET</option>
+						        <option value="phylotastic_GetSpeciesScientificNameFromCommonName_NCBI_GET">phylotastic_GetSpeciesScientificNameFromCommonName_NCBI_GET</option>
+                 </optgroup>
+						     <optgroup label="Tree Comparison">
+						     		<option value="phylotastic_CompareTrees_Sym_Dendropy_POST">phylotastic_CompareTrees_Sym_Dendropy_POST</option>
+						        <option value="phylotastic_CompareTrees_BL_Dendropy_POST">phylotastic_CompareTrees_BL_Dendropy_POST</option>
+						     </optgroup>   
+						     <optgroup label="Tree Transformation">
+						     		<option value="phylotastic_GeneTree_Scaling">phylotastic_GeneTree_Scaling</option>
+						     		<option value="phylotastic_GetChronograms_ScaledSpeciesTree_DateLife_POST">phylotastic_GetChronograms_ScaledSpeciesTree_DateLife_POST</option>
+						     		<option value="phylotastic_GetMetadata_Chronogram_DateLife_POST">phylotastic_GetMetadata_Chronogram_DateLife_POST</option>
+						     </optgroup>   
+					   </select>  
+					  </div>	 
+		    	  <br/>
+				  
+
+				    <div class="msgBoxButtons">
+				  	  <input class="msgButton" type="button" name="Avoid" value="Avoid" onclick="saveAvoidanceService_Modal_List();" id="btn_Avoid_AvoidanceServices">
+				  	  <input class="msgButton" type="button" name="Cancel" value="Cancel" onclick="closeAvoidanceService_Modal_List();" id="btn_Avoid_AvoidanceServices">
+				    </div>
+			   </div> 
+		</div>
+		
+		<div id="cy"></div>
+
+		<div class="modal_2" id="idLoading"></div>
+
+		<!-- ******FOOTER****** -->
+    <footer class="footer">
+        <div class="container text-center">
+             <small class="copyright">Developed <i class="glyphicon glyphicon-pawn"></i> by <a href="http://thanhnh-infinity.github.io" target="_blank">Thanh H. Nguyen</a> for <a href="http://phylotastic.org" target="_blank">Phylotastic</a> project </small>
+
+        </div>    
+   </footer>
+	</body>
+	
+</html>
