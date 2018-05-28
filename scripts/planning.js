@@ -3,6 +3,43 @@
  * Doc : Service composition framework - Workflow Description Tool
  * Date : 25-Feb-2017
  **/
+function call_back_portal(){
+    if (isEmpty(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING) 
+        || jQuery.isEmptyObject(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING)){
+      $.msgBox({
+          title:"Warning",
+          content:"There is no data sending"
+          //type:"error"
+       }); 
+      return;
+    } 
+
+    console.log("Prepare data to send POST request to Portal")
+    console.log(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING)
+    str_data = JSON.stringify(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING)
+    //console.log(str_data)
+
+    $.ajax({
+        method: "POST",
+        url: PORTAL_CALL_BACK_API_WORKFLOW_DATA,
+        dataType: "json",
+        data: str_data,
+        contentType: "text/plain; charset=utf-8",
+        success: function (data) {
+           console.log(data)
+        },
+        error: function (textStatus, errorThrown) {
+           if (textStatus.status = 200){
+               console.log(textStatus)  
+           } else {
+               console.log("Error")
+               console.log(textStatus)
+           }
+        }
+    });
+
+}
+
 function recomposite_get_simWorkflow(){
   var initial_state_data = {}
   var goal_state_data = {}
