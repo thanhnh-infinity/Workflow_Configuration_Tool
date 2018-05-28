@@ -1169,7 +1169,7 @@ function initGraphicFrame(){
 }
 
 $(function(){
-
+  /*
   try {
     var url_string = window.location.href; //window.location.href
     var url = new URL(url_string);
@@ -1188,6 +1188,7 @@ $(function(){
   } catch(err){
     console.log(err)
   }
+  */
 
   console.log("Make API to get list of hierarchy of phylotastic resources class ")
   request_HierarchyClasses_Of_Class("http://www.cs.nmsu.edu/~epontell/CDAO/cdao.owl#phylotastic_resources");

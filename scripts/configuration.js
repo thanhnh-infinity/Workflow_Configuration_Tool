@@ -44,6 +44,7 @@ var ONTOLOGY_API_ENGINE_ROOT_GRAPH = "http://phylo.cs.nmsu.edu:8000/buildGraph"
 var PLANNING_ENGINE_API_ROOT = "http://104.197.8.189:7000/planningEngine/generateWorkflow"
 var RE_PLANNING_ENGINE_API_ROOT = "http://104.197.8.189:7000/planningEngine/recomposite"
 var ONTOLOGY_API_ROOT = "http://104.197.8.189:7000/query"
+var PORTAL_CALL_BACK_API_WORKFLOW_DATA = "http://128.123.63.10:5000/generate"
 
 var REQUEST_TYPE_GET_INSTANCES_OF_CLASS = "get_all_instances_of_a_class"
 var REQUEST_TYPE_GET_HIERARCHY_SUBCLASS_OF_CLASS = "get_hierarchy_subclasses_of_a_class"

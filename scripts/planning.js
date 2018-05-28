@@ -16,7 +16,9 @@ function call_back_portal(){
     console.log("Prepare data to send POST request to Portal Call-Back URL")
     console.log(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING)
     str_data = JSON.stringify(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING)
+
     //console.log(str_data)
+    /*
     var call_back_portal_url = ""
     call_back_portal_url = window.localStorage.getItem("PORTAL_CALL_BACK_API_WORKFLOW_DATA");
     console.log(call_back_portal_url)
@@ -29,13 +31,15 @@ function call_back_portal(){
          }); 
         return;
     }
+    */
+    var call_back_portal_url = PORTAL_CALL_BACK_API_WORKFLOW_DATA
    
     $.ajax({
-        method: "POST",
+        type: "POST",
+        method:"POST",
         url: call_back_portal_url,
-        dataType: "json",
         data: str_data,
-        contentType: "text/plain; charset=utf-8",
+        contentType: "application/json; charset=utf-8",
         success: function (data) {
            console.log(data)
            alert(JSON.stringify(data))
