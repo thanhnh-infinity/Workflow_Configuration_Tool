@@ -6,6 +6,7 @@
  
 
 /* Global variable and components */
+var WCT_VERSION = "1.0.1"
 var GLOBAL_NODES_DATA = [];
 var PLANNING_ENGINE_ID = 0;
 var RECOMPOSITE_ENGINE_ID = 0;
