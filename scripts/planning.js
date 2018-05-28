@@ -13,7 +13,7 @@ function call_back_portal(){
          }); 
         return;
     } 
-    console.log("Prepare data to send POST request to Portal")
+    console.log("Prepare data to send POST request to Portal Call-Back URL")
     console.log(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING)
     str_data = JSON.stringify(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING)
     //console.log(str_data)
@@ -29,7 +29,7 @@ function call_back_portal(){
          }); 
         return;
     }
-
+   
     $.ajax({
         method: "POST",
         url: call_back_portal_url,
@@ -51,7 +51,7 @@ function call_back_portal(){
            }
         }
     });
-
+      
 }
 
 function recomposite_get_simWorkflow(){

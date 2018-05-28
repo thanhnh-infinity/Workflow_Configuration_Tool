@@ -1176,9 +1176,8 @@ $(function(){
     var call_back_data = url.searchParams.get("callback");
     if (isEmpty(call_back_data)){
       $.msgBox({
-            title:"Warning",
-            content:"There is no Portal URL Call Back in your request. You only works in WCT and has no connection with Portal"
-            //type:"error"
+            title:"Notice !",
+            content:"No portal url call back in your request. You have worked normally with stand-alone WCT without connection with Portal"
       });
       window.localStorage.removeItem("PORTAL_CALL_BACK_API_WORKFLOW_DATA")
     } else {
