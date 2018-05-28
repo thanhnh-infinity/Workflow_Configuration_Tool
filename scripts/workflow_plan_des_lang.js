@@ -1170,6 +1170,26 @@ function initGraphicFrame(){
 
 $(function(){
 
+  try {
+    var url_string = window.location.href; //window.location.href
+    var url = new URL(url_string);
+    var call_back_data = url.searchParams.get("callback");
+    if (isEmpty(call_back_data)){
+      $.msgBox({
+            title:"Warning",
+            content:"There is no Portal URL Call Back in your request. You only works in WCT and has no connection with Portal"
+            //type:"error"
+      });
+      window.localStorage.removeItem("PORTAL_CALL_BACK_API_WORKFLOW_DATA")
+    } else {
+      window.localStorage.setItem("PORTAL_CALL_BACK_API_WORKFLOW_DATA",call_back_data.trim())
+      console.log("Call Back Portal URL : ")
+      console.log(call_back_data)  
+    }
+  } catch(err){
+    console.log(err)
+  }
+
   console.log("Make API to get list of hierarchy of phylotastic resources class ")
   request_HierarchyClasses_Of_Class("http://www.cs.nmsu.edu/~epontell/CDAO/cdao.owl#phylotastic_resources");
 

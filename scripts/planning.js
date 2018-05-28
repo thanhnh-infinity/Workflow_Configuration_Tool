@@ -6,34 +6,48 @@
 function call_back_portal(){
     if (isEmpty(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING) 
         || jQuery.isEmptyObject(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING)){
-      $.msgBox({
-          title:"Warning",
-          content:"There is no data sending"
-          //type:"error"
-       }); 
-      return;
+        $.msgBox({
+            title:"Warning",
+            content:"There is no data sending"
+            //type:"error"
+         }); 
+        return;
     } 
-
     console.log("Prepare data to send POST request to Portal")
     console.log(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING)
     str_data = JSON.stringify(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING)
     //console.log(str_data)
+    var call_back_portal_url = ""
+    call_back_portal_url = window.localStorage.getItem("PORTAL_CALL_BACK_API_WORKFLOW_DATA");
+    console.log(call_back_portal_url)
+
+    if (isEmpty(call_back_portal_url)){
+         $.msgBox({
+            title:"Warning",
+            content:"There is no Portal Call Back URL. Please contact with administrator"
+            //type:"error"
+         }); 
+        return;
+    }
 
     $.ajax({
         method: "POST",
-        url: PORTAL_CALL_BACK_API_WORKFLOW_DATA,
+        url: call_back_portal_url,
         dataType: "json",
         data: str_data,
         contentType: "text/plain; charset=utf-8",
         success: function (data) {
            console.log(data)
+           alert(JSON.stringify(data))
         },
         error: function (textStatus, errorThrown) {
            if (textStatus.status = 200){
-               console.log(textStatus)  
+               alert(JSON.stringify(textStatus))
+               alert(textStatus)
            } else {
                console.log("Error")
-               console.log(textStatus)
+               alert(JSON.stringify(textStatus))
+               alert(textStatus)
            }
         }
     });
