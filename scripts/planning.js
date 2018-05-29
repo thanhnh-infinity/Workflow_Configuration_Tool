@@ -48,8 +48,8 @@ function generate_WorkflowDescription_NLG(){
             timeout: NLG_ENGINE_SERVER_TIME_OUT,
             contentType: "application/json; charset=utf-8",
             success: function (data) {
-               console.log(data)
-               alert(JSON.stringify(data))
+               //console.log(data)
+               //alert(JSON.stringify(data))
                window.localStorage.setItem("NLG_WORKFLOW_DESCRIPTION",JSON.stringify(data))
                document.getElementById("idLoading").style.display = "none";
 
@@ -58,15 +58,15 @@ function generate_WorkflowDescription_NLG(){
             error: function (textStatus, errorThrown) {
                if (textStatus.status = 200){
                    alert(JSON.stringify(textStatus))
-                   alert(textStatus)
+                   //alert(textStatus)
                } else {
                    console.log("Error")
                    alert(JSON.stringify(textStatus))
-                   alert(textStatus)
+                   //alert(textStatus)
                }
                /* Demo tam - xoa sau */
-               window.localStorage.setItem("NLG_WORKFLOW_DESCRIPTION",'{"data":"No data"}')
-               openDisplayWFDescripton_NLG_Modal();
+               //window.localStorage.setItem("NLG_WORKFLOW_DESCRIPTION",'{"data":"No data"}')
+               //openDisplayWFDescripton_NLG_Modal();
                /***/
                document.getElementById("idLoading").style.display = "none";
             }

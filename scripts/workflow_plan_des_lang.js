@@ -23,7 +23,7 @@ function openDisplayWFDescripton_NLG_Modal(){
     var WF_Description = JSON.parse(window.localStorage.getItem("NLG_WORKFLOW_DESCRIPTION"));
 
     //document.getElementById('contentWFDescription').innerHTML = JSON.stringify(WF_Description)
-    document.getElementById('contentWFDescription').innerHTML = WF_Description['data']
+    document.getElementById('contentWFDescription').innerHTML = WF_Description['blob']
 }
 
 function closeDisplayWorkflowDescriptionNLG_Modal(){
