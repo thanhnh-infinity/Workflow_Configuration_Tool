@@ -15,6 +15,23 @@ function updateEngine(){
   openChangeEngine_Modal();
 }
 
+function openDisplayWFDescripton_NLG_Modal(){
+    document.getElementById('cy').style.visibility = "hidden";
+    var displayWorkflowDescriptionNLG_Modal = document.getElementById('displayWorkflowDescriptionNLG_Modal');
+    displayWorkflowDescriptionNLG_Modal.style.display = "block";
+
+    var WF_Description = JSON.parse(window.localStorage.getItem("NLG_WORKFLOW_DESCRIPTION"));
+
+    //document.getElementById('contentWFDescription').innerHTML = JSON.stringify(WF_Description)
+    document.getElementById('contentWFDescription').innerHTML = WF_Description['data']
+}
+
+function closeDisplayWorkflowDescriptionNLG_Modal(){
+    var displayWorkflowDescriptionNLG_Modal = document.getElementById('displayWorkflowDescriptionNLG_Modal');
+    displayWorkflowDescriptionNLG_Modal.style.display = "none";
+    document.getElementById('cy').style.visibility = "visible";
+}
+
 function infoWFChangesData(){
    document.getElementById('cy').style.visibility = "hidden";
    var displayChangesInformation_Modal = document.getElementById('displayChangesInformation_Modal');
@@ -203,6 +220,8 @@ function clearData(){
 
   ADDED_OPERATION_NODES_LIST = []
   AVOIDANCE_OPERATION_NODES_LIST = []
+
+  window.localStorage.removeItem("NLG_WORKFLOW_DESCRIPTION");
   
   document.getElementById('cy').style.visibility = "visible";
   initGraphicFrame();

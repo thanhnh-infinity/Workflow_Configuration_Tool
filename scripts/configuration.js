@@ -7,6 +7,8 @@
 
 /* Global variable and components */
 var WCT_VERSION = "1.0.1"
+var PLANNING_ENGINE_SERVER_TIME_OUT = 60000
+var NLG_ENGINE_SERVER_TIME_OUT = 20000
 var GLOBAL_NODES_DATA = [];
 var PLANNING_ENGINE_ID = 0;
 var RECOMPOSITE_ENGINE_ID = 0;

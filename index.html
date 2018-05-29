@@ -124,7 +124,7 @@
 									 <li>
 											    <a class="parent" href="#"><i class="fa fa-tasks"></i> Interact Workflow  <i class="fa fa-play-circle"></i></a>
 											    <ul class="sub-menu">
-											       <li><a href="#" onclick="call_back_portal();"><i class="fa fa-language"></i> NL Workflow Description</a></li>
+											       <li><a href="#" onclick="generate_WorkflowDescription_NLG();"><i class="fa fa-language"></i> NL Workflow Description</a></li>
 											       <li><a href="#" onclick="execute_entire_workflow();"><i class="fa fa-fighter-jet"></i> Execute Workflow</a></li>
 											    </ul>
 											 </li>
@@ -551,6 +551,21 @@
 			   </div> 
 		
 		</div>
+
+		<div id="displayWorkflowDescriptionNLG_Modal" class="modal">
+			  <div class="modal-content">
+			      <span class="close" onclick="closeDisplayWorkflowDescriptionNLG_Modal();">&times;</span>
+			   		<div class="msgBoxTitle"><i class="fa fa-language"></i> Workflow Description by NLG</div>
+			   		<br/>
+			   		<span id="contentWFDescription"></span>
+			   		<br/>
+					  <br/>
+
+					  <div class="msgBoxButtons">
+					  	<input class="msgButton" type="button" name="OK" value="OK" onclick="closeDisplayWorkflowDescriptionNLG_Modal();" id="btn_Cancel_DisplayWFDescription">
+					  </div>
+				</div>
+		</div>	   		
 
 		<div id="displayChangesInformation_Modal" class="modal">
 			   <div class="modal-content">

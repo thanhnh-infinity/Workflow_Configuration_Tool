@@ -3,59 +3,77 @@
  * Doc : Service composition framework - Workflow Description Tool
  * Date : 25-Feb-2017
  **/
-function call_back_portal(){
-    if (isEmpty(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING) 
-        || jQuery.isEmptyObject(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING)){
-        $.msgBox({
-            title:"Warning",
-            content:"There is no data sending"
-            //type:"error"
-         }); 
-        return;
-    } 
-    console.log("Prepare data to send POST request to Portal Call-Back URL")
-    console.log(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING)
-    str_data = JSON.stringify(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING)
+function generate_WorkflowDescription_NLG(){
+    /* Process for the case that Users still keep current workflow and have not clink composite and/or recomposite workflow */
+    var wf_description =  JSON.parse(window.localStorage.getItem("NLG_WORKFLOW_DESCRIPTION"))
+    if (isEmpty(wf_description)){
+        if (isEmpty(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING) 
+            || jQuery.isEmptyObject(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING)){
+            $.msgBox({
+                title:"Warning",
+                content:"There is no data sending"
+                //type:"error"
+             }); 
+            return;
+        } 
+        console.log("Prepare data to send POST request to Portal Call-Back URL")
+        console.log(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING)
+        str_data = JSON.stringify(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING)
 
-    //console.log(str_data)
-    /*
-    var call_back_portal_url = ""
-    call_back_portal_url = window.localStorage.getItem("PORTAL_CALL_BACK_API_WORKFLOW_DATA");
-    console.log(call_back_portal_url)
+        //console.log(str_data)
+        /*
+        var call_back_portal_url = ""
+        call_back_portal_url = window.localStorage.getItem("PORTAL_CALL_BACK_API_WORKFLOW_DATA");
+        console.log(call_back_portal_url)
 
-    if (isEmpty(call_back_portal_url)){
-         $.msgBox({
-            title:"Warning",
-            content:"There is no Portal Call Back URL. Please contact with administrator"
-            //type:"error"
-         }); 
-        return;
-    }
-    */
-    var call_back_portal_url = PORTAL_CALL_BACK_API_WORKFLOW_DATA
-   
-    $.ajax({
-        type: "POST",
-        method:"POST",
-        url: call_back_portal_url,
-        data: str_data,
-        contentType: "application/json; charset=utf-8",
-        success: function (data) {
-           console.log(data)
-           alert(JSON.stringify(data))
-        },
-        error: function (textStatus, errorThrown) {
-           if (textStatus.status = 200){
-               alert(JSON.stringify(textStatus))
-               alert(textStatus)
-           } else {
-               console.log("Error")
-               alert(JSON.stringify(textStatus))
-               alert(textStatus)
-           }
+        if (isEmpty(call_back_portal_url)){
+             $.msgBox({
+                title:"Warning",
+                content:"There is no Portal Call Back URL. Please contact with administrator"
+                //type:"error"
+             }); 
+            return;
         }
-    });
-      
+        */
+
+
+        document.getElementById("idLoading").style.display = "block";
+        var call_back_portal_url = PORTAL_CALL_BACK_API_WORKFLOW_DATA
+        //console.log(str_data)
+        $.ajax({
+            type: "POST",
+            method:"POST",
+            url: call_back_portal_url,
+            data: str_data,
+            timeout: NLG_ENGINE_SERVER_TIME_OUT,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+               console.log(data)
+               alert(JSON.stringify(data))
+               window.localStorage.setItem("NLG_WORKFLOW_DESCRIPTION",JSON.stringify(data))
+               document.getElementById("idLoading").style.display = "none";
+
+               openDisplayWFDescripton_NLG_Modal();
+            },
+            error: function (textStatus, errorThrown) {
+               if (textStatus.status = 200){
+                   alert(JSON.stringify(textStatus))
+                   alert(textStatus)
+               } else {
+                   console.log("Error")
+                   alert(JSON.stringify(textStatus))
+                   alert(textStatus)
+               }
+               /* Demo tam - xoa sau */
+               window.localStorage.setItem("NLG_WORKFLOW_DESCRIPTION",'{"data":"No data"}')
+               openDisplayWFDescripton_NLG_Modal();
+               /***/
+               document.getElementById("idLoading").style.display = "none";
+            }
+        });
+    } else {
+      openDisplayWFDescripton_NLG_Modal();
+    }    
 }
 
 function recomposite_get_simWorkflow(){
@@ -154,7 +172,7 @@ function recomposite_get_simWorkflow(){
   string_request_data = JSON.stringify(request_data)
   console.log(string_request_data.length)
   document.getElementById("idLoading").style.display = "block";
-
+  window.localStorage.removeItem("NLG_WORKFLOW_DESCRIPTION");
   
   $.ajax({
         method: "POST",
@@ -290,7 +308,7 @@ function executePlanner_toGet_WorkFlow(){
   string_request_data = JSON.stringify(request_data)
   console.log(string_request_data.length)
   document.getElementById("idLoading").style.display = "block";
-
+  window.localStorage.removeItem("NLG_WORKFLOW_DESCRIPTION");
   /* Simulate data - Read from file */
   //document.getElementById("idLoading").style.display = "none";
   //DisplayWorkflow_Graphic_From_Source(TEST_ABSTRACT_CONCRETE_WORKFLOW_PLAN_DATA)
