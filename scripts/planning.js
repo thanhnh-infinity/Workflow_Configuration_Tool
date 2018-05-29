@@ -6,6 +6,8 @@
 function generate_WorkflowDescription_NLG(){
     /* Process for the case that Users still keep current workflow and have not clink composite and/or recomposite workflow */
     var wf_description =  JSON.parse(window.localStorage.getItem("NLG_WORKFLOW_DESCRIPTION"))
+    console.log(wf_description)
+    
     if (isEmpty(wf_description)){
         if (isEmpty(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING) 
             || jQuery.isEmptyObject(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING)){
