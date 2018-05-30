@@ -221,6 +221,9 @@ function clearData(){
   ADDED_OPERATION_NODES_LIST = []
   AVOIDANCE_OPERATION_NODES_LIST = []
 
+  WORKFLOW_FOR_DESCRIPTION_NLG = {}
+  GLOBAL_WORKFLOW_PLAN_DATA_PLANNING = {}
+
   window.localStorage.removeItem("NLG_WORKFLOW_DESCRIPTION");
   
   document.getElementById('cy').style.visibility = "visible";

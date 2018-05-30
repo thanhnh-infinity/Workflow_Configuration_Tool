@@ -9,8 +9,8 @@ function generate_WorkflowDescription_NLG(){
     console.log(wf_description)
     
     if (isEmpty(wf_description)){
-        if (isEmpty(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING) 
-            || jQuery.isEmptyObject(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING)){
+        if (isEmpty(WORKFLOW_FOR_DESCRIPTION_NLG) 
+            || jQuery.isEmptyObject(WORKFLOW_FOR_DESCRIPTION_NLG)){
             $.msgBox({
                 title:"Warning",
                 content:"There is no data sending"
@@ -19,8 +19,8 @@ function generate_WorkflowDescription_NLG(){
             return;
         } 
         console.log("Prepare data to send POST request to Portal Call-Back URL")
-        console.log(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING)
-        str_data = JSON.stringify(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING)
+        console.log(WORKFLOW_FOR_DESCRIPTION_NLG)
+        str_data = JSON.stringify(WORKFLOW_FOR_DESCRIPTION_NLG)
 
         //console.log(str_data)
         /*
@@ -192,7 +192,7 @@ function recomposite_get_simWorkflow(){
             }
             console.log(data)
             result_workflow = data
-            
+            WORKFLOW_FOR_DESCRIPTION_NLG = result_workflow
             DisplayWorkflow_Graphic_From_Source(result_workflow)
             document.getElementById("idLoading").style.display = "none";
         },
@@ -202,6 +202,7 @@ function recomposite_get_simWorkflow(){
                console.log(textStatus)
                document.getElementById("idLoading").style.display = "none";
                result_workflow = textStatus
+               WORKFLOW_FOR_DESCRIPTION_NLG = result_workflow
 
            } else {
                consol.log("sadasd")
@@ -209,6 +210,7 @@ function recomposite_get_simWorkflow(){
                document.getElementById("idLoading").style.display = "none";
                return;
            }
+
            DisplayWorkflow_Graphic_From_Source(result_workflow)   
            document.getElementById("idLoading").style.display = "none";
         }
@@ -333,6 +335,7 @@ function executePlanner_toGet_WorkFlow(){
             console.log(data)
             result_workflow = data
             GLOBAL_WORKFLOW_PLAN_DATA_PLANNING = result_workflow
+            WORKFLOW_FOR_DESCRIPTION_NLG = result_workflow
             DisplayWorkflow_Graphic_From_Source(result_workflow)
             document.getElementById("idLoading").style.display = "none";
         },
