@@ -427,11 +427,12 @@
 							      <option value="newickTree">newickTree</option>
 							      <option value="phyloXML">phyloXML</option>
 							      <option value="phylo4Tree">phylo4Tree</option>
-							       <option value="compare_tree_format">compare_tree_format</option>	
+							      <option value="compare_tree_format">compare_tree_format</option>	
+							      <option value="nmsu_tree_format">nmsu_tree_format</option>	
 							    </optgroup> 
 							    <optgroup label="URI format">
 						        <option value="http_url">http_url</option>
-						         <option value="uri">uri</option>
+						        <option value="uri">uri</option>
 						      </optgroup>
 						      <optgroup label="Test data format">
 						      	<option value="data_format_A">data_format_A</option>
@@ -447,14 +448,26 @@
 						        <option value="data_format_C_2">data_format_C_2</option>
 						      </optgroup>
 						      <optgroup label="Names Format">
-						         <option value="names_format_1">names_format_1</option>
-						      	 <option value="names_format_2">names_format_2</option>
-						         <option value="names_format_3">names_format_3</option>
-						         <option value="names_format_4">names_format_4</option>
-						         <option value="names_format_5">names_format_5</option>
-						         <option value="names_format_6">names_format_6</option>
-						         <option value="names_format_resolved_GNR">names_format_resolved_GNR</option>
-						         <option value="names_format_resolved_OT">names_format_resolved_OT</option>
+						         <option value="raw_names_format_1">raw_names_format_1</option>
+						      	 <option value="raw_names_format_2">raw_names_format_2</option>
+						         <option value="raw_names_format_3">raw_names_format_3</option>
+						         <option value="raw_names_format_4">raw_names_format_4</option>
+						         <option value="raw_names_format_5">raw_names_format_5</option>
+						         <option value="raw_names_format_6">raw_names_format_6</option>
+						         <option value="raw_names_format_GNR">raw_names_format_GNR</option>
+						         <option value="raw_names_format_OT">raw_names_format_OT</option>
+						      </optgroup>
+						      <optgroup label="Resolved Names Format">
+						         <option value="resolved_names_format_1">resolved_names_format_1</option>
+						      	 <option value="resolved_names_format_2">resolved_names_format_2</option>
+						         <option value="resolved_names_format_3">resolved_names_format_3</option>
+						         <option value="resolved_names_format_4">resolved_names_format_4</option>
+						         <option value="resolved_names_format_5">resolved_names_format_5</option>
+						         <option value="resolved_names_format_6">resolved_names_format_6</option>
+						         <option value="resolved_names_format_GNR">resolved_names_format_GNR</option>
+						         <option value="resolved_names_format_OT">resolved_names_format_OT</option>
+						         <option value="resolved_names_format_Phylomatic">resolved_names_format_Phylomatic</option>
+						         <option value="resolved_names_format_PhyloT">resolved_names_format_PhyloT</option>
 						      </optgroup>
 						   </select>  
 						</div>
@@ -483,7 +496,7 @@
 					  
 			    	<div id="divDisplayGoalState_DataFormatClasses_TreeView">
 					   <select id="selectGoalState_DataFormatClasses_TreeView" class="selectpicker show-tick" data-live-search="true">
-					      <optgroup label="Primitive">
+					        <optgroup label="Primitive">
 						        <option value=""></option>
 						        <option value="boolean">boolean</option>
 						      	<option value="number">number</option>
@@ -508,11 +521,12 @@
 							      <option value="newickTree">newickTree</option>
 							      <option value="phyloXML">phyloXML</option>
 							      <option value="phylo4Tree">phylo4Tree</option>
-							       <option value="compare_tree_format">compare_tree_format</option>	
+							      <option value="compare_tree_format">compare_tree_format</option>	
+							      <option value="nmsu_tree_format">nmsu_tree_format</option>	
 							    </optgroup> 
 							    <optgroup label="URI format">
 						        <option value="http_url">http_url</option>
-						         <option value="uri">uri</option>
+						        <option value="uri">uri</option>
 						      </optgroup>
 						      <optgroup label="Test data format">
 						      	<option value="data_format_A">data_format_A</option>
@@ -527,16 +541,27 @@
 							      <option value="data_format_C_1">data_format_C_1</option>
 						        <option value="data_format_C_2">data_format_C_2</option>
 						      </optgroup>
-
 						      <optgroup label="Names Format">
-						         <option value="names_format_1">names_format_1</option>
-						      	 <option value="names_format_2">names_format_2</option>
-						         <option value="names_format_3">names_format_3</option>
-						         <option value="names_format_4">names_format_4</option>
-						         <option value="names_format_5">names_format_5</option>
-						         <option value="names_format_6">names_format_6</option>
-						         <option value="names_format_resolved_GNR">names_format_resolved_GNR</option>
-						         <option value="names_format_resolved_OT">names_format_resolved_OT</option>
+						         <option value="raw_names_format_1">raw_names_format_1</option>
+						      	 <option value="raw_names_format_2">raw_names_format_2</option>
+						         <option value="raw_names_format_3">raw_names_format_3</option>
+						         <option value="raw_names_format_4">raw_names_format_4</option>
+						         <option value="raw_names_format_5">raw_names_format_5</option>
+						         <option value="raw_names_format_6">raw_names_format_6</option>
+						         <option value="raw_names_format_GNR">raw_names_format_GNR</option>
+						         <option value="raw_names_format_OT">raw_names_format_OT</option>
+						      </optgroup>
+						      <optgroup label="Resolved Names Format">
+						         <option value="resolved_names_format_1">resolved_names_format_1</option>
+						      	 <option value="resolved_names_format_2">resolved_names_format_2</option>
+						         <option value="resolved_names_format_3">resolved_names_format_3</option>
+						         <option value="resolved_names_format_4">resolved_names_format_4</option>
+						         <option value="resolved_names_format_5">resolved_names_format_5</option>
+						         <option value="resolved_names_format_6">resolved_names_format_6</option>
+						         <option value="resolved_names_format_GNR">resolved_names_format_GNR</option>
+						         <option value="resolved_names_format_OT">resolved_names_format_OT</option>
+						         <option value="resolved_names_format_Phylomatic">resolved_names_format_Phylomatic</option>
+						         <option value="resolved_names_format_PhyloT">resolved_names_format_PhyloT</option>
 						      </optgroup>	
 					   </select>  
 					</div>
