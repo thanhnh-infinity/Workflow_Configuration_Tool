@@ -80,7 +80,41 @@ function infoWFChangesData(){
 
    htmlDivEngineConf += '<div class="row"><div class="col-sm-3"><h5>Planning Engine: <b>' + PLANNING_ENGINE_ID + '</b></h5></div><div class="col-sm-7"><h5>' + planning_engine_mess + '</h5></div></div><div class="row"><div class="col-sm-3"><h5>Recomposite Engine: <b>' + RECOMPOSITE_ENGINE_ID + '</b></h5></div><div class="col-sm-7"><h5>' + recomposite_engine_mess + '</h5></div></div>';
    
-   divEngineConf.innerHTML = htmlDivEngineConf   
+   divEngineConf.innerHTML = htmlDivEngineConf 
+
+   /* Change status Engine */
+   //console.log("Bat day")
+   $.ajax({
+        method: "POST",
+        url: ROOT_ENGINE_API,
+        dataType: "json",
+        //async:false,
+        //processData: false,
+        //data: string_request_data,
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            //console.log(data)
+            if (isEmpty(data)){
+              document.getElementById('engineStatus').innerHTML = "Error - Not working"
+              document.getElementById('engineStatus').className = "label label-danger"
+            } else {
+              document.getElementById('engineStatus').innerHTML = "Good"
+              document.getElementById('engineStatus').className = "label label-success"
+            }
+        },
+        error: function (textStatus, errorThrown) {
+            //console.log(textStatus) 
+            if (textStatus.readyState == 4 && textStatus.responseText == "OntologyAPI_Service" && textStatus.statusText == "OK"){
+              document.getElementById('engineStatus').innerHTML = "Good"
+              document.getElementById('engineStatus').className = "label label-success" 
+            } else {
+              document.getElementById('engineStatus').innerHTML = "Error - Not working"
+              document.getElementById('engineStatus').className = "label label-danger"
+            }
+           
+        }
+
+  }); 
 }
 
 function removeAvoidanceService(item){
