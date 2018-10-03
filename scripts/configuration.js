@@ -44,7 +44,7 @@ var PLANNING_ENGINE_API_ROOT = "http://127.0.0.1:8000/planningEngine/generateWor
 var RE_PLANNING_ENGINE_API_ROOT = "http://127.0.0.1:8000/planningEngine/recomposite"
 var PORTAL_CALL_BACK_API_WORKFLOW_DATA = "http://128.123.63.10:5000/generate"
 var ONTOLOGY_API_ROOT = "http://127.0.0.1:8000/query"
-var ROOT_ENGINE_API = "http://127.0.0.1:7000/"
+var ROOT_ENGINE_API = "http://127.0.0.1:8000/"
 
 
 //var ROOT_ENGINE_API = "http://104.197.8.189:7000/"
