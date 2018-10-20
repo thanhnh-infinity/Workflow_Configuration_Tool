@@ -27,6 +27,18 @@ function closeAboutUs_Modal(){
     document.getElementById('cy').style.visibility = "visible";
 }
 
+function openHelp_Modal(){
+    document.getElementById('cy').style.visibility = "hidden";
+    var help_Modal = document.getElementById('help_Modal');
+    help_Modal.style.display = "block";
+}
+
+function closeHelp_Modal(){
+    var help_Modal = document.getElementById('help_Modal');
+    help_Modal.style.display = "none";
+    document.getElementById('cy').style.visibility = "visible";
+}
+
 function openDisplayWFDescripton_NLG_Modal(){
     document.getElementById('cy').style.visibility = "hidden";
     var displayWorkflowDescriptionNLG_Modal = document.getElementById('displayWorkflowDescriptionNLG_Modal');
