@@ -4,6 +4,8 @@
 		    Web Service Composition - Workflow Description Language
 		</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="Workflow Configuration Tool is an online Web tool that allows users to specify preference and requirement in order to get full Phylogeny workflow.">
+		<meta name="keywords" content="Web Services Composition, Phylotastic, Web Services, WSDL, OWL-S, Logic Programming, Answer Set Programming, Artificial Intelligence, Planning, Knowledge Representation and Reasoning, workflow, planning, replanning, composition, recompositon, quality of services, QoS, machine learning, similarity index., Phylotastic">
 		<link rel="shortcut icon" href="./images/favicon.ico">
 		<script src="./libs/jquery/jquery-2.0.3.min.js"></script>
 		<script src="./libs/jquery/jquery-ui.js"></script>
@@ -141,7 +143,7 @@
 							<li class="parent">
 							  <a href="#"><i class="fa fa-institution"></i> More</a>
 							  <ul class="sub-menu">
-									<li><a href="#"><i class="fa fa-info-circle"></i> About Us</a></li>
+									<li><a href="#" onclick="openAboutUs_Modal();"><i class="fa fa-info-circle"></i> About Us</a></li>
 									<li><a href="#"><i class="fa fa-question-circle-o"></i> Help</a></li>
 									<li><a href="https://github.com/phylotastic" target="_blank"><i class="fa fa-github-alt"></i> Phylotastic on Github</a></li>
 									<li><a href="#"><i class="fa fa-files-o"></i> Publifications</a></li>
@@ -590,6 +592,26 @@
 					  	<input class="msgButton" type="button" name="OK" value="OK" onclick="closeDisplayWorkflowDescriptionNLG_Modal();" id="btn_Cancel_DisplayWFDescription">
 					  </div>
 				</div>
+		</div>
+
+		<div id="aboutUs_Modal" class="modal">
+			  <div class="modal-content">
+			        <span class="close" onclick="closeAboutUs_Modal();">&times;</span>
+			   		<div class="msgBoxTitle"><i class="fa fa-info-circle"></i>About Me and this tool</div>
+			   		<br/>
+			   		<p><big>
+			   			I am <b>Thanh H Nguyen</b>. I am a PhD candidate in the Computer Science Department at New Mexico State University. I graduated with my Masters of Computer Science at James Cook University in Australia. My thesis, entitled Data Mining in Internet Banking, is currently being used in a number of Asian banks.<br/>
+			   			My research interests include <b>Data Mining and Knowledge Discovery</b>(classification, clustering, association rules and prediction models), <b>Artificial Intelligence</b> (knowledge representation and reasoning, planning, logic programming, answer set programming, inductive logic programing, and Semantics Web - Web Services Composition), <b>Machine Learning and Collective Intelligence</b> (recommendation system, discovering groups, searching and ranking, collaborative filtering, document filtering, generative modelling, advanced classification, etc.) and Big-Data processing.<br/>
+			   			My primary research now focuses on <b>Automation Web Services Composition</b> in Semantics Web. I am developing a completed end-to-end AI system to collect requirements from users in Natural Language and explore workflows that can satisfy the users requirements automatically. After the workflow is achieved, our system is able to execute each Web Service component in workflow sequence in order to achieve the goal.<br/>
+			   			This Web Tool is : <b>Workflow Description Graphical Tool (WDGL)</b> - an UI computer software used by end-users in order to provide tools to build an workflow based on user's requirements. Normal users will be provided enough tools to describle which input/output of composition, which services they want or don't want, generate workflow in visulization, change or modify origin workflow and re-generate new workflow.
+			   		</big></p>
+			   		<br/>
+					  <br/>
+
+					  <div class="msgBoxButtons">
+					  	<input class="msgButton" type="button" name="OK" value="OK" onclick="closeAboutUs_Modal();" id="btn_Cancel_DisplayWFDescription">
+					  </div>
+				</div>
 		</div>	   		
 
 		<div id="displayChangesInformation_Modal" class="modal">
@@ -741,6 +763,7 @@
 		<!-- ******FOOTER****** -->
     <footer class="footer">
         <div class="container text-center">
+             <small class="copyright">Workflow Configuration Tool - </small>
              <small class="copyright">Developed <i class="glyphicon glyphicon-pawn"></i> by <a href="http://thanhnh-infinity.github.io" target="_blank">Thanh H. Nguyen</a> for <a href="http://phylotastic.org" target="_blank">Phylotastic</a> project </small>
 
         </div>    

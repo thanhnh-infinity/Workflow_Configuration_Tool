@@ -15,6 +15,18 @@ function updateEngine(){
   openChangeEngine_Modal();
 }
 
+function openAboutUs_Modal(){
+    document.getElementById('cy').style.visibility = "hidden";
+    var aboutUs_Modal = document.getElementById('aboutUs_Modal');
+    aboutUs_Modal.style.display = "block";
+}
+
+function closeAboutUs_Modal(){
+    var aboutUs_Modal = document.getElementById('aboutUs_Modal');
+    aboutUs_Modal.style.display = "none";
+    document.getElementById('cy').style.visibility = "visible";
+}
+
 function openDisplayWFDescripton_NLG_Modal(){
     document.getElementById('cy').style.visibility = "hidden";
     var displayWorkflowDescriptionNLG_Modal = document.getElementById('displayWorkflowDescriptionNLG_Modal');
