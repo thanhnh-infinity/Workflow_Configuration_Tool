@@ -10,6 +10,24 @@ function reload(){
    cy.fit()
 }
 
+
+function opentExecutionMonitoring_Modal(){
+    document.getElementById('cy').style.visibility = "hidden";
+    var executionMonitoring_Modal = document.getElementById('executionMonitoring_Modal');
+    executionMonitoring_Modal.style.display = "block";
+}
+
+function closeExecutionMonitoring_Modal(){
+    var executionMonitoring_Modal = document.getElementById('executionMonitoring_Modal');
+    executionMonitoring_Modal.style.display = "none";
+    document.getElementById('cy').style.visibility = "visible";
+}
+
+function executeWorkflow(){
+  alert("Under construction");
+  return;
+}
+
 function updateEngine(){
   closeDisplayChangesInformation_Modal();
   openChangeEngine_Modal();

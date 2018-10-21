@@ -127,7 +127,7 @@
 											    <a class="parent" href="#"><i class="fa fa-tasks"></i> Interact Workflow  <i class="fa fa-play-circle"></i></a>
 											    <ul class="sub-menu">
 											       <li><a href="#" onclick="generate_WorkflowDescription_NLG();"><i class="fa fa-language"></i> NL Workflow Description</a></li>
-											       <li><a href="#" onclick="execute_entire_workflow();"><i class="fa fa-fighter-jet"></i> Execute Workflow</a></li>
+											       <li><a href="#" onclick="opentExecutionMonitoring_Modal();"><i class="fa fa-fighter-jet"></i> Execute Workflow</a></li>
 											    </ul>
 											 </li>
 								</ul>		
@@ -620,10 +620,35 @@
 			   		<p><big>
 			   		    <p><b>Composite</b></p>
 			   		    <ul>
-			   		      <li><b>Step 1</b> Select menu <b>Configurate/Initial State</b> to specify your inputs which includes the resources and their data formats.<br/>
+			   		      <li><b>Step 1</b> Select menu <b>Configurate/Initial State</b> to specify your inputs which includes the resources and their data formats.
 			   		      </li>
-			   		      <li><b>Step 2</b> Select menu <b>Configurate/Goal State</b> to specify your desired outputs which includes the resources and their data formats.<br/>
-			   		      <li><b>Step 3</b> Select menu <b>Services Engine/Generate Workflow</b> to generate your workflow.<br/>
+			   		      <li><b>Step 2</b> Select menu <b>Configurate/Goal State</b> to specify your desired outputs which includes the resources and their data formats.
+			   		      <li><b>Step 3</b> Select menu <b>Services Engine/Generate Workflow</b> to generate your workflow.
+			   		      </li>
+			   		    </ul>
+			   		    <br/>
+			   		    <p><b>Re-Composite</b></p>
+			   		    <ul>
+			   		      <li><b>Step 1</b> Select menu <b>Configurate/Initial State</b> to update your inputs which includes the resources and their data formats. (IO Changes)
+			   		      </li>
+			   		      <li><b>Step 2</b> Select menu <b>Configurate/Goal State</b> to update your desired outputs which includes the resources and their data formats. (IO Changes)</li>
+			   		      <li><b>Step 3</b> Select menu <b>Configurate/Refine Current Workflow/</b> to update your changes (avoidance, insertion, inclusion, etc).
+			   		      </li>
+			   		      <li><b>Step 4</b> Select menu <b>Services Engine/Re-Composite Workflow/</b> to regenerate the most prefer workflow as your changes.
+			   		      </li>
+			   		    </ul>
+			   		    <br/>
+			   		    <p><b>Execute Workflow</b></p>
+			   		    <ul>
+			   		      <li>Select menu <b>Interact Workflow/Execute Workflow</b> to execute workflow. Following data requirement in Execution Monitoring form
+			   		      </li>
+			   		    </ul>
+			   		    <br/>
+			   		    <p><b>Failure Detection and Recovery Process</b></p>
+			   		    <ul>
+			   		      <li><b>Step 1</b> Select menu <b>Interact Workflow/Execute Workflow</b> to execute workflow. Following data requirement in Execution Monitoring form
+			   		      </li>
+			   		      <li><b>Step 2</b> If execution is failed, confirm the failed service and start Recovery Process engine
 			   		      </li>
 			   		    </ul>
 			   			
@@ -776,7 +801,23 @@
 				    </div>
 			   </div> 
 		</div>
-		
+
+		<div id="executionMonitoring_Modal" class="modal">
+			  <div class="modal-content">
+			        <span class="close" onclick="closeExecutionMonitoring_Modal();">&times;</span>
+			   		<div class="msgBoxTitle"><i class="fa fa-info-circle"></i>Execution Workflow Monitoring</div>
+			   		<br/>
+			   		<p><big>
+			   		    Under construction
+			   		</big></p>
+			   		<br/>
+					  <div class="msgBoxButtons">
+					  	<input class="msgButton" type="button" name="Execute" value="Execute" onclick="executeWorkflow();" id="btn_ExecuteWorkfow">
+					  	<input class="msgButton" type="button" name="Fake Recovery" value="Fake Recovery" onclick="lauchRecoveryProcess();" id="btn_LauchRecoveryProcess">
+					  </div>
+				</div>
+		</div>
+
 		<div id="cy"></div>
 
 		<div class="modal_2" id="idLoading"></div>
