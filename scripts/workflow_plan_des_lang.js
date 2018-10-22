@@ -10,11 +10,71 @@ function reload(){
    cy.fit()
 }
 
+function openFailureDetection_Modal(){
+    closeExecutionMonitoring_Modal();
+
+    /* Fake Failed Service */
+
+    var failedService = JSON.parse(window.localStorage.getItem("FAILED_SERVICE_INFO"));
+    if (isEmpty(failedService) || jQuery.isEmptyObject(failedService)){
+      $.msgBox({
+          title:"Warning",
+          content:"No failed service is determined. Workflow can be executed normally"
+          //type:"error"
+       }); 
+      return;
+    } else {
+      document.getElementById("failedServiceID").innerHTML = " " + failedService['service_name']
+      document.getElementById("failedServiceIndex").innerHTML = " " + failedService['service_index']
+      document.getElementById("failedServiceReason").innerHTML = " " + failedService['reason_of_fail']
+    }  
+    /* Present in form */
+
+    document.getElementById('cy').style.visibility = "hidden";
+    var failureDetection_Modal = document.getElementById('failureDetection_Modal');
+    failureDetection_Modal.style.display = "block";
+}
+
+function fakeFailedService(){
+    var full_plan_services = GLOBAL_WORKFLOW_PLAN_DATA_PLANNING.workflow_plan[0].full_plan
+    var plan_length = full_plan_services.length
+    var ranInt = Math.floor(Math.random() * (plan_length - 1 - 0 + 1)) + 0;
+    var failedService = full_plan_services[ranInt]
+    window.localStorage.setItem("FAILED_SERVICE_INFO",JSON.stringify(failedService));
+
+    openFailureDetection_Modal();
+}
+
+function closeFailureDetection_Modal(){
+    var failureDetection_Modal = document.getElementById('failureDetection_Modal');
+    failureDetection_Modal.style.display = "none";
+    document.getElementById('cy').style.visibility = "visible";
+}
 
 function opentExecutionMonitoring_Modal(){
-    document.getElementById('cy').style.visibility = "hidden";
-    var executionMonitoring_Modal = document.getElementById('executionMonitoring_Modal');
-    executionMonitoring_Modal.style.display = "block";
+   if (isEmpty(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING.workflow_plan) || jQuery.isEmptyObject(GLOBAL_WORKFLOW_PLAN_DATA_PLANNING.workflow_plan)){   
+     $.msgBox({
+      title:"Warning",
+      content:"There is no original workflow"
+      //type:"error"
+     });
+   } else if (isEmpty(GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE) || jQuery.isEmptyObject(GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE)){
+     $.msgBox({
+      title:"Warning",
+      content:"Please recheck initial state"
+      //type:"error"
+     }); 
+   } else if (isEmpty(GLOBAL_GOAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE) || jQuery.isEmptyObject(GLOBAL_GOAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE)){
+     $.msgBox({
+      title:"Warning",
+      content:"Please recheck goal state"
+      //type:"error"
+     });  
+   } else {
+      document.getElementById('cy').style.visibility = "hidden";
+      var executionMonitoring_Modal = document.getElementById('executionMonitoring_Modal');
+      executionMonitoring_Modal.style.display = "block";
+   }   
 }
 
 function closeExecutionMonitoring_Modal(){

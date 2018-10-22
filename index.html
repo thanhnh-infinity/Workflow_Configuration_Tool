@@ -813,10 +813,32 @@
 			   		<br/>
 					  <div class="msgBoxButtons">
 					  	<input class="msgButton" type="button" name="Execute" value="Execute" onclick="executeWorkflow();" id="btn_ExecuteWorkfow">
-					  	<input class="msgButton" type="button" name="Fake Recovery" value="Fake Recovery" onclick="lauchRecoveryProcess();" id="btn_LauchRecoveryProcess">
+					  	<input class="msgButton" type="button" name="Fake to Test" value="Fake to Test" onclick="fakeFailedService();" id="btn_FakeToTEst">
 					  </div>
 				</div>
 		</div>
+
+
+		<div id="failureDetection_Modal" class="modal">
+			  <div class="modal-content">
+			        <span class="close" onclick="closeFailureDetection_Modal();">&times;</span>
+			   		<div class="msgBoxTitle"><i class="fa fa-info-circle"></i>Failure Detection Information</div>
+			   		<br/>
+			   		<h4><span class="label label-danger"><i class="fa fa-users"></i> Failed Service Information</span></h4>
+					<hr/>
+					<p><big><b>Failed Service ID:<b></big><span id="failedServiceID"></span></p>
+			   		<br/>
+			   		<p><big><b>Failed Service Index:<b></big><span id="failedServiceIndex"></span></p>
+			   		<br/>
+			   		<p><big><b>Reason of Error<b></big><span id="failedServiceReason"></span></p>
+				  	<div class="msgBoxButtons">
+				  		<input class="msgButton" type="button" name="Re-execute" value="Re-execute" onclick="" id="btn_ReExecuteWorkfow">
+				  		<input class="msgButton" type="button" name="Recovery" value="Recovery" onclick="launchRecoveryProcess();" id="btn_LauchRecoveryProcess">
+				  		<input class="msgButton" type="button" name="Close" value="Close" onclick="closeFailureDetection_Modal();" id="btn_CloseFailireDetection_Modal">
+				  	</div>
+				</div>
+		</div>
+
 
 		<div id="cy"></div>
 
