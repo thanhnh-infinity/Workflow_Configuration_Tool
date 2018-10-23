@@ -11,7 +11,12 @@ function launchRecoveryProcess(){
   initial_state_data = GLOBAL_INITIAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE
   goal_state_data =   GLOBAL_GOAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE
   original_plan = GLOBAL_WORKFLOW_PLAN_DATA_PLANNING.workflow_plan[0].raw_plan
-  failed_service = JSON.parse(window.localStorage.getItem("FAILED_SERVICE_INFO"))
+  //failed_service = JSON.parse(window.localStorage.getItem("FAILED_SERVICE_INFO"))
+  failed_service = {"service_name" : "","service_index":""}
+  failed_service['service_name'] = document.getElementById("txtFakedServiceID").value
+  failed_service['service_index'] = document.getElementById("txtFakedServiceIndex").value
+
+  console.log(failed_service)
 
   if (isEmpty(initial_state_data) || jQuery.isEmptyObject(initial_state_data)){
      $.msgBox({

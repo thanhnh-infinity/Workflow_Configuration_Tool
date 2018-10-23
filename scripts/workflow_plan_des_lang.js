@@ -24,15 +24,20 @@ function openFailureDetection_Modal(){
        }); 
       return;
     } else {
-      document.getElementById("failedServiceID").innerHTML = " " + failedService['service_name']
-      document.getElementById("failedServiceIndex").innerHTML = " " + failedService['service_index']
-      document.getElementById("failedServiceReason").innerHTML = " " + failedService['reason_of_fail']
+      //document.getElementById("failedServiceID").innerHTML = " " + failedService['service_name']
+      //document.getElementById("failedServiceIndex").innerHTML = " " + failedService['service_index']
+      //document.getElementById("failedServiceReason").innerHTML = " " + failedService['reason_of_fail']
     }  
     /* Present in form */
 
     document.getElementById('cy').style.visibility = "hidden";
     var failureDetection_Modal = document.getElementById('failureDetection_Modal');
     failureDetection_Modal.style.display = "block";
+}
+
+function refreshFake(){
+   closeFailureDetection_Modal();
+   fakeFailedService();
 }
 
 function fakeFailedService(){
