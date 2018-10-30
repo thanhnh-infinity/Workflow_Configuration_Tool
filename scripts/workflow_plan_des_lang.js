@@ -168,6 +168,9 @@ function infoWFChangesData(){
    if (isEmpty(RECOMPOSITE_ENGINE_ID) || RECOMPOSITE_ENGINE_ID ==0){
     RECOMPOSITE_ENGINE_ID=2
    }
+   if (isEmpty(RECOVERY_ENGINE_ID) || RECOVERY_ENGINE_ID ==0){
+    RECOMPOSITE_ENGINE_ID=1
+   }
 
    if (PLANNING_ENGINE_ID == 1){
      planning_engine_mess = "For Test Only - Run Clingo normally - Simple Case"
@@ -184,8 +187,14 @@ function infoWFChangesData(){
      recomposite_engine_mess = "Clingo - Ext Sim Index (Node, Edge, Topo) - External calculation"
    } 
 
+   if (RECOVERY_ENGINE_ID == 1){
+     recovery_engine_mess = "Clingo - Run normal, score optimize by formalization"
+   } else if (RECOVERY_ENGINE_ID == 2){
+     recovery_engine_mess = "Clingo - High performance ASP"
+   } 
 
-   htmlDivEngineConf += '<div class="row"><div class="col-sm-3"><h5>Planning Engine: <b>' + PLANNING_ENGINE_ID + '</b></h5></div><div class="col-sm-7"><h5>' + planning_engine_mess + '</h5></div></div><div class="row"><div class="col-sm-3"><h5>Recomposite Engine: <b>' + RECOMPOSITE_ENGINE_ID + '</b></h5></div><div class="col-sm-7"><h5>' + recomposite_engine_mess + '</h5></div></div>';
+
+   htmlDivEngineConf += '<div class="row"><div class="col-sm-3"><h5>Planning Engine: <b>' + PLANNING_ENGINE_ID + '</b></h5></div><div class="col-sm-7"><h5>' + planning_engine_mess + '</h5></div></div><div class="row"><div class="col-sm-3"><h5>Recomposite Engine: <b>' + RECOMPOSITE_ENGINE_ID + '</b></h5></div><div class="col-sm-7"><h5>' + recomposite_engine_mess + '</h5></div></div><div class="row"><div class="col-sm-3"><h5>Recovery Engine: <b>' + RECOVERY_ENGINE_ID + '</b></h5></div><div class="col-sm-7"><h5>' + recovery_engine_mess + '</h5></div></div>';
    
    divEngineConf.innerHTML = htmlDivEngineConf 
 
@@ -305,12 +314,21 @@ function openChangeEngine_Modal(){
      RECOMPOSITE_ENGINE_ID = 2
    } else {
      RECOMPOSITE_ENGINE_ID = recomposite_engine
-   } 
+   }
+
+   var recovery_engine = parseInt(window.localStorage.getItem("RECOVERY_ENGINE_ID"))
+   if (isEmpty(recovery_engine) || recovery_engine == 0 || isNaN(recovery_engine)){
+     RECOVERY_ENGINE_ID = 1
+   } else {
+     RECOVERY_ENGINE_ID = recovery_engine
+   }
 
    $('select[id=selectCompositionEngine]').val(PLANNING_ENGINE_ID);
    $('select[id=selectCompositionEngine]').selectpicker('refresh');
    $('select[id=selectReCompositionEngine]').val(RECOMPOSITE_ENGINE_ID);
    $('select[id=selectReCompositionEngine]').selectpicker('refresh');
+   $('select[id=selectRecoveryEngine]').val(RECOVERY_ENGINE_ID);
+   $('select[id=selectRecoveryEngine]').selectpicker('refresh');
 
 
 }
@@ -326,6 +344,12 @@ function saveChangeEngine_Modal(){
    var selectReCompositionEngine = e2.options[e2.selectedIndex].value
    if (isEmpty(selectReCompositionEngine)){
         selectReCompositionEngine = "2"
+   }
+
+   var e3 =  document.getElementById("selectRecoveryEngine");
+   var selectRecoveryEngine = e3.options[e3.selectedIndex].value
+   if (isEmpty(selectRecoveryEngine)){
+        selectRecoveryEngine = "1"
    } 
 
 
@@ -333,6 +357,8 @@ function saveChangeEngine_Modal(){
    PLANNING_ENGINE_ID = parseInt(selectCompositionEngine)
    window.localStorage.setItem("RECOMPOSITE_ENGINE_ID",selectReCompositionEngine)
    RECOMPOSITE_ENGINE_ID = parseInt(selectReCompositionEngine)
+   window.localStorage.setItem("RECOVERY_ENGINE_ID",selectRecoveryEngine)
+   RECOVERY_ENGINE_ID = parseInt(selectRecoveryEngine)
    
    var changeEngine_Modal = document.getElementById('changeEngine_Modal');
    changeEngine_Modal.style.display = "none";
@@ -1373,6 +1399,12 @@ $(function(){
   RECOMPOSITE_ENGINE_ID = parseInt(window.localStorage.getItem("RECOMPOSITE_ENGINE_ID"))
   if (isEmpty(RECOMPOSITE_ENGINE_ID) || RECOMPOSITE_ENGINE_ID == 0 || isNaN(RECOMPOSITE_ENGINE_ID)){
     RECOMPOSITE_ENGINE_ID = 2
+  }  
+
+  console.log("Set up REcovery Engine")
+  RECOVERY_ENGINE_ID = parseInt(window.localStorage.getItem("RECOVERY_ENGINE_ID"))
+  if (isEmpty(RECOVERY_ENGINE_ID) || RECOVERY_ENGINE_ID == 0 || isNaN(RECOVERY_ENGINE_ID)){
+    RECOVERY_ENGINE_ID = 1
   }  
 
   console.log("Ready to Go")

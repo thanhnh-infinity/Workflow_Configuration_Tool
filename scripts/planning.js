@@ -18,6 +18,10 @@ function launchRecoveryProcess(){
 
   console.log(failed_service)
 
+  if (isEmpty(RECOVERY_ENGINE_ID) || RECOVERY_ENGINE_ID == 0){
+    RECOVERY_ENGINE_ID = 1
+  }
+
   if (isEmpty(initial_state_data) || jQuery.isEmptyObject(initial_state_data)){
      $.msgBox({
         title:"Warning",
@@ -90,7 +94,7 @@ function launchRecoveryProcess(){
                    },
                    "models" : {
                       "number" : 1,
-                      "engine" : 1 //default 2
+                      "engine" : RECOVERY_ENGINE_ID
                    }
                  };
   string_request_data = JSON.stringify(request_data)

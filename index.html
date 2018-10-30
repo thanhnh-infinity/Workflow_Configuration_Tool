@@ -204,7 +204,7 @@
 			<div id="changeEngine_Modal" class="modal">
 			  <div class="modal-content">
 			  		<span class="close" onclick="closeChangeEngine_Modal();">&times;</span>	
-			  		<div class="msgBoxTitle"><i class="fa fa-gear"></i> Configurate Composite and Re-composite Engines</div>
+			  		<div class="msgBoxTitle"><i class="fa fa-gear"></i> Configurate Composite, Re-composite and Recovery Engines</div>
 			   		<br/>   
 					  <h4><span class="label label-primary"><i class="fa fa-rocket"></i> Composition Engine</span></h4>
 					     
@@ -212,7 +212,7 @@
 				  	  <option value="1" title="1 - Clingo, Generate a random Workflow">1 - Clingo, Generate a random Workflow</option>
 				  	  <option value="2" title="2 - Clingo, Generate Highest QoS value Workflow by External Calculation">2 - Clingo, Generate Highest QoS value Workflow by External Calculation</option>
 				  	  <option value="3" title="3 - Clingcon, Generate Highest QoS value Workflow by Internal Calculation">3 - Clingcon, Generate Highest QoS value Workflow by Internal Calculation</option>
-			      </select> 
+			       </select> 
 							  
 				    <br/><br/>
 				    
@@ -220,8 +220,15 @@
 				    <select id="selectReCompositionEngine" class="selectpicker" data-width="auto">
 				  	  <option value="1" title="1 - Clingo, Approximate Sim Index, Sim Nodes Only">1 - Clingo, Approximate Sim Index, Sim Nodes Only</option>
 				  	  <option value="2" title="2 - Clingo, Exact Sim Index, (Nodes, Edges and Topology) Sim Index">2 - Clingo, Exact Sim Index, (Nodes, Edges and Topology) Sim Index</option>
-			      </select>
+			        </select>
 				    <br/><br/>
+
+				    <h4><span class="label label-primary"><i class="fa fa-retweet"></i> Recovery Engine</span></h4>
+				    <select id="selectRecoveryEngine" class="selectpicker" data-width="auto">
+				  	  <option value="1" title="1 - Clingo : Normal Score as Formalization">1 - Clingo : Normal Score as Formalization</option>
+				  	  <option value="2" title="2 - Clingo : High performance">2 - Clingo : High performance</option>
+			        </select>
+			        <br/><br/>
 				    
 						<div id="div_Save_Operations_TreeView" class="msgBoxButtons">
 					  	<input class="msgButton" type="button" name="Save" value="Save" onclick="saveChangeEngine_Modal();" id="btn_Save_ChangeEngine">
