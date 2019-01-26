@@ -30,6 +30,14 @@ function openFailureDetection_Modal() {
     }
     /* Present in form */
 
+    var full_plan_services = GLOBAL_WORKFLOW_PLAN_DATA_PLANNING.workflow_plan[0].full_plan;
+    document.getElementById('selectFailureService').innerHTML = "";
+    for(var i = 0 ; i < full_plan_services.length ; i++){
+        var service = full_plan_services[i];
+        //console.log("Vao day")
+        document.getElementById('selectFailureService').innerHTML += '<option value="'+service['service_name']+'|'+service['service_index']+'">'+ service['service_name']+'|'+service['service_index'] +'</option>';
+    }
+
     document.getElementById('cy').style.visibility = "hidden";
     var failureDetection_Modal = document.getElementById('failureDetection_Modal');
     failureDetection_Modal.style.display = "block";
