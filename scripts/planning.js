@@ -12,6 +12,13 @@ function launchRecoveryProcess(){
   goal_state_data =   GLOBAL_GOAL_STATE_ONTOLOGY_FOR_PLANNING_PURPOSE
   original_plan = GLOBAL_WORKFLOW_PLAN_DATA_PLANNING.workflow_plan[0].raw_plan
   
+
+  if (isEmpty(RECOVERY_ENGINE_ID) || RECOVERY_ENGINE_ID == 0){
+    RECOVERY_ENGINE_ID = 3
+  }
+
+
+  /* Receive information for Failure Detection Service -- MUST BE CHANGED when HAS EXECUTION MONITORING */
   failed_service = {"service_name" : "","service_index":""}
   if (!isEmpty(document.getElementById("txtFakedServiceID").value) && !isEmpty(document.getElementById("txtFakedServiceIndex").value)){
     failed_service['service_name'] = document.getElementById("txtFakedServiceID").value
@@ -28,14 +35,27 @@ function launchRecoveryProcess(){
       return;
     }
   } 
+  //console.log(failed_service)
 
+  /* Receive information for Generated Resources -- MUST BE CHANGED when HAS EXECUTION MONITORING */
+  //var arrayGeneratedResources = JSON.parse(window.localStorage.getItem("GENERATED_RESOURCES"));
+  if (RECOVERY_ENGINE_ID == 4){
+    var arrayGeneratedResources = [];
+    var full_plan_services = GLOBAL_WORKFLOW_PLAN_DATA_PLANNING.workflow_plan[0].full_plan;
+    for(var i = 0 ; i < failed_service['service_index']; i++){
+          console.log(full_plan_services[i]['service_parameters']['output']['components'][i]);
+          var arrOuput = full_plan_services[i]['service_parameters']['output']['components'];
+          for(var j = 0 ; j < arrOuput.length; j++){
+            var obj = {"resource_name_in_output_of_service":"test" + i + "_" + j,"resource_ontology_id":arrOuput[j]['resource_ontology_id'],"resource_data_format_id":arrOuput[j]['resource_data_format'],"resource_data":"dataTest" + i + "_" + j}
+            arrayGeneratedResources.push(obj);
 
-
-  console.log(failed_service)
-
-  if (isEmpty(RECOVERY_ENGINE_ID) || RECOVERY_ENGINE_ID == 0){
-    RECOVERY_ENGINE_ID = 1
+          }
+    }
+  } else {
+    var arrayGeneratedResources = [];
   }
+  
+  console.log(arrayGeneratedResources);
 
   if (isEmpty(initial_state_data) || jQuery.isEmptyObject(initial_state_data)){
      $.msgBox({
@@ -105,6 +125,7 @@ function launchRecoveryProcess(){
                             "Index" : failed_service["service_index"]
                           }
                       ],
+                      "generated_resources" : arrayGeneratedResources,
                       "original_workflow" : original_plan
                    },
                    "models" : {

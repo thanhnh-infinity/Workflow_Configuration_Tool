@@ -177,7 +177,7 @@ function infoWFChangesData() {
         RECOMPOSITE_ENGINE_ID = 2
     }
     if (isEmpty(RECOVERY_ENGINE_ID) || RECOVERY_ENGINE_ID == 0) {
-        RECOMPOSITE_ENGINE_ID = 1
+        RECOVERY_ENGINE_ID = 3
     }
 
     if (PLANNING_ENGINE_ID == 1) {
@@ -196,9 +196,13 @@ function infoWFChangesData() {
     }
 
     if (RECOVERY_ENGINE_ID == 1) {
-        recovery_engine_mess = "Clingo - Run normal, score optimize by formalization"
+        recovery_engine_mess = "Clingo - Run normal, score optimize by OLD formalization";
     } else if (RECOVERY_ENGINE_ID == 2) {
-        recovery_engine_mess = "Clingo - High performance ASP"
+        recovery_engine_mess = "Clingo - High performance ASP";
+    } else if (RECOVERY_ENGINE_ID == 3) {
+        recovery_engine_mess = "Clingo - Planning with Successful Services";
+    } else if (RECOVERY_ENGINE_ID == 4) {
+        recovery_engine_mess = "Clingo - Replanning from Failed State";
     }
 
 
