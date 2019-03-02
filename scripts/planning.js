@@ -34,6 +34,11 @@ function launchRecoveryProcess(){
       alert("No failure service");
       return;
     }
+
+    textManuallExpectStep = document.getElementById('txtManualExpectStep').value;
+    if (isNaN(textManuallExpectStep.trim())){
+      textManuallExpectStep = "";
+    }
   } 
   //console.log(failed_service)
 
@@ -53,9 +58,10 @@ function launchRecoveryProcess(){
     }
   } else {
     var arrayGeneratedResources = [];
+    var full_plan_services = GLOBAL_WORKFLOW_PLAN_DATA_PLANNING.workflow_plan[0].full_plan;
   }
   
-  console.log(arrayGeneratedResources);
+  //console.log(arrayGeneratedResources);
 
   if (isEmpty(initial_state_data) || jQuery.isEmptyObject(initial_state_data)){
      $.msgBox({
@@ -127,6 +133,7 @@ function launchRecoveryProcess(){
                       ],
                       "generated_resources" : arrayGeneratedResources,
                       "original_N_services" : full_plan_services.length,
+                      "manual_expect_step" : textManuallExpectStep,
                       "original_workflow" : original_plan
                    },
                    "models" : {
