@@ -42,14 +42,14 @@ function launchRecoveryProcess(){
   if (RECOVERY_ENGINE_ID == 4){
     var arrayGeneratedResources = [];
     var full_plan_services = GLOBAL_WORKFLOW_PLAN_DATA_PLANNING.workflow_plan[0].full_plan;
-    for(var i = 0 ; i < failed_service['service_index']; i++){
-          console.log(full_plan_services[i]['service_parameters']['output']['components'][i]);
-          var arrOuput = full_plan_services[i]['service_parameters']['output']['components'];
-          for(var j = 0 ; j < arrOuput.length; j++){
-            var obj = {"resource_name_in_output_of_service":"test" + i + "_" + j,"resource_ontology_id":arrOuput[j]['resource_ontology_id'],"resource_data_format_id":arrOuput[j]['resource_data_format'],"resource_data":"dataTest" + i + "_" + j}
-            arrayGeneratedResources.push(obj);
-
-          }
+    for(var i = 0 ; i < full_plan_services.length ; i++){
+        if (full_plan_services[i]['service_index'] < failed_service['service_index']){  
+            var arrOuput = full_plan_services[i]['service_parameters']['output']['components'];
+            for(var j = 0 ; j < arrOuput.length; j++){
+              var obj = {"resource_name_in_output_of_service":"test" + i + "_" + j,"resource_ontology_id":arrOuput[j]['resource_ontology_id'],"resource_data_format_id":arrOuput[j]['resource_data_format'],"resource_data":"dataTest" + i + "_" + j}
+              arrayGeneratedResources.push(obj);
+            }
+        }
     }
   } else {
     var arrayGeneratedResources = [];
@@ -126,6 +126,7 @@ function launchRecoveryProcess(){
                           }
                       ],
                       "generated_resources" : arrayGeneratedResources,
+                      "original_N_services" : full_plan_services.length,
                       "original_workflow" : original_plan
                    },
                    "models" : {
